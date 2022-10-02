@@ -7,20 +7,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HcisToolbarComponent } from './hcis-toolbar/hcis-toolbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HcisToolbarComponent
-  ],
+  declarations: [AppComponent, HcisToolbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatButtonModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
