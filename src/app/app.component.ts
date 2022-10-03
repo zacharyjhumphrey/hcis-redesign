@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { getNavTabs, getTabContent } from 'src/vendor/backend-interface';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hcis-redesign';
+  constructor() {
+    getTabContent()
+  }
 }
