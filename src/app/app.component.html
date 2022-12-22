@@ -1,17 +1,16 @@
 <app-hcis-toolbar></app-hcis-toolbar>
 <mat-drawer-container class="example-container">
-    <mat-drawer mode="side" opened>HOME PAGE</mat-drawer>
+    <mat-drawer class="side-nav" mode="side" opened>
+        <mat-selection-list #shoes [multiple]="false">
+            <mat-list-option *ngFor="let page of pages" [value]="page">
+                <a [routerLink]="page.route" routerLinkActive="active" ariaCurrentWhenActive="page">{{ page.name }}</a>
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-drawer>
     <mat-drawer-content>
-        <div class="announcements-panel">
-            <div id="home-panel-header">
-                <header class="mat-display-2">ANNOUNCMENTS</header>
-                <div class="underline"></div>
-            </div>
-
-            <img id="announcements-panel-logo" src="../../assets/honors-logo.png" alt="Honors Logo">
-            <img id="announcements-panel-accent" src="../../assets/announcements-panel-accent.png"
-                alt="Announcements Panel Accent">
-        </div>
+        <router-outlet></router-outlet>
+        <!-- <app-announcements></app-announcements> -->
+        <!-- <app-e-reader></app-e-reader> -->
     </mat-drawer-content>
 </mat-drawer-container>
 <app-hcis-footer></app-hcis-footer>

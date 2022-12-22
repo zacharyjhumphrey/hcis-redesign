@@ -1,0 +1,45 @@
+<form>
+    <mat-form-field id="search-value" appearance="fill">
+        <mat-label>Search Readings...</mat-label>
+        <input matInput type="text" name="searchValue" [(ngModel)]="searchValue"
+            (ngModelChange)="updateFilteredReadings()">
+        <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <div id="search-select-row">
+        <mat-form-field appearance="fill">
+            <mat-label>Class</mat-label>
+            <mat-select name="selectedClass" [(ngModel)]="selectedClass" (ngModelChange)="updateFilteredReadings()">
+                <mat-option *ngFor="let class of classes" [value]="class">
+                    {{ classes }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Professors</mat-label>
+            <mat-select name="selectedProfessor" [(ngModel)]="selectedProfessor"
+                (ngModelChange)="updateFilteredReadings()">
+                <mat-option *ngFor="let professor of professors" [value]="professor">
+                    {{ professor }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </div>
+</form>
+
+<mat-list role="list">
+    <mat-list-item *ngFor="let reading of filteredReadings" role="listitem" (click)="openReading(reading)"
+        class="class-reading">
+        <mat-icon mat-list-icon>folder</mat-icon>
+        <!-- <mat-icon mat-list-icon>hearing</mat-icon> -->
+        <p mat-line>{{ reading.title }}</p>
+        <p mat-line> {{ reading.author }} </p>
+        <p mat-line> {{ reading.professor }} </p>
+        <p mat-line> {{ reading.class }} </p>
+        <mat-divider></mat-divider>
+    </mat-list-item>
+</mat-list>
