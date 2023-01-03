@@ -54,7 +54,6 @@ $hcis-redesign-theme: mat.define-light-theme((color: (primary: $hcis-redesign-pr
 // that you are using.
 @include mat.all-component-themes($hcis-redesign-theme);
 
-
 html,
 body {
   height: 100%;

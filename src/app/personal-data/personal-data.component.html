@@ -1,0 +1,166 @@
+<div>
+    <form>
+        <div>
+            <p class="personal-data-subheading">Personal Information</p>
+            <div id="personal-information-input-group-row-1" class="equal-parted-input-group">
+                <div class="input-group">
+                    <label class="personal-data-input-label" for="firstName">First Name</label>
+                    <mat-form-field id="first-name-input" appearance="fill">
+                        <input matInput type="text" name="firstName" [(ngModel)]="personData.firstName"
+                            (ngModelChange)="updatePersonalData(personData)">
+                    </mat-form-field>
+                </div>
+
+                <div class="input-group">
+                    <label class="personal-data-input-label" for="middleName">Middle Name</label>
+                    <mat-form-field id="middle-name-input" appearance="fill">
+                        <input matInput type="text" name="middleName" [(ngModel)]="personData.middleName"
+                            (ngModelChange)="updatePersonalData(personData)">
+                    </mat-form-field>
+                </div>
+
+                <div class="input-group">
+                    <label class="personal-data-input-label" for="lastName">Last Name</label>
+                    <mat-form-field id="last-name-input" appearance="fill">
+                        <input matInput type="text" name="lastName" [(ngModel)]="personData.lastName"
+                            (ngModelChange)="updatePersonalData(personData)">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div id="personal-information-input-group-row-2" class="equal-parted-input-group">
+                <div class="input-group">
+                    <label class="personal-data-input-label" for="preferredName">Preferred Name</label>
+                    <mat-form-field id="preferred-name-input" appearance="fill">
+                        <input matInput type="text" name="preferredName" [(ngModel)]="personData.preferredName"
+                            (ngModelChange)="updatePersonalData(personData)">
+                    </mat-form-field>
+                </div>
+
+                <div class="input-group">
+                    <label class="personal-data-input-label" for="generation">Generation</label>
+                    <mat-form-field id="generation-input" appearance="fill">
+                        <input matInput type="text" name="generation" [(ngModel)]="personData.generation"
+                            (ngModelChange)="updatePersonalData(personData)">
+                    </mat-form-field>
+                </div>
+
+                <div class="input-group">
+                    <label class="personal-data-input-label" for="localAddressCellPhone">Cell Phone</label>
+                    <mat-form-field id="local-address-cell-phone-input" appearance="fill">
+                        <input matInput type="text" name="localAddressCellPhone"
+                            [(ngModel)]="personData.localAddressCellPhone"
+                            (ngModelChange)="updatePersonalData(personData)">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <p class="personal-data-subheading">Local Address</p>
+
+            <div id="local-address-row-1">
+                <div class="row-1-col">
+                    <div id="city-zip-input-group">
+                        <div id="city-input-group" class="input-group">
+                            <label class="personal-data-input-label" for="localAddressCity">City</label>
+                            <mat-form-field id="local-address-city-input" appearance="fill">
+                                <input matInput type="text" name="localAddressCity"
+                                    [(ngModel)]="personData.localAddressCityName"
+                                    (ngModelChange)="updatePersonalData(personData)">
+                            </mat-form-field>
+                        </div>
+
+                        <div id="zip-input-group" class="input-group">
+                            <label class="personal-data-input-label" for="localAddressZIP">ZIP</label>
+                            <mat-form-field id="local-address-zip-input" appearance="fill">
+                                <input matInput type="text" name="localAddressZIP"
+                                    [(ngModel)]="personData.localAddressZIP"
+                                    (ngModelChange)="updatePersonalData(personData)">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div id="address-lines-input-group">
+                        <div id="city-input-group" class="input-group">
+                            <label class="personal-data-input-label">Address</label>
+                            <mat-form-field id="local-address-line-1-input" appearance="fill">
+                                <input matInput type="text" name="localAddressLine1"
+                                    [(ngModel)]="personData.localAddressLine1"
+                                    (ngModelChange)="updatePersonalData(personData)">
+                            </mat-form-field>
+                            <mat-form-field id="local-address-line-2-input" appearance="fill">
+                                <input matInput type="text" name="localAddressLine2"
+                                    [(ngModel)]="personData.localAddressLine2"
+                                    (ngModelChange)="updatePersonalData(personData)">
+                            </mat-form-field>
+                            <mat-form-field id="local-address-line-3-input" appearance="fill">
+                                <input matInput type="text" name="localAddressLine3"
+                                    [(ngModel)]="personData.localAddressLine3"
+                                    (ngModelChange)="updatePersonalData(personData)">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-1-col">
+                    <div id="local-address-phone-input-group" class="input-group">
+                        <label class="personal-data-input-label" for="localAddressPhone">Phone</label>
+                        <mat-form-field id="local-address-phone-input" appearance="fill">
+                            <input matInput type="text" name="localAddressPhone"
+                                [(ngModel)]="personData.localAddressPhone"
+                                (ngModelChange)="updatePersonalData(personData)">
+                        </mat-form-field>
+                    </div>
+
+                    <div id="local-address-hall-input-group" class="input-group">
+                        <label class="personal-data-input-label" for="localAddressHall">Location on Campus</label>
+                        <mat-form-field id="local-address-hall-input" appearance="fill">
+                            <input matInput type="text" name="localAddressHall"
+                                [(ngModel)]="personData.localAddressHall"
+                                (ngModelChange)="updatePersonalData(personData)">
+                        </mat-form-field>
+                    </div>
+
+                    <div id="local-address-po-box-and-room-no-input-group">
+                        <div class="input-group">
+                            <label class="personal-data-input-label" for="localAddressPOBox">PO BOX</label>
+                            <mat-form-field id="local-address-po-box-input" appearance="fill">
+                                <input matInput type="text" name="localAddressPOBox"
+                                    [(ngModel)]="personData.campusPOBox"
+                                    (ngModelChange)="updatePersonalData(personData)">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="personal-data-input-label" for="localAddressRoomNumber">Room Number</label>
+                            <mat-form-field id="local-address-room-number-input" appearance="fill">
+                                <input matInput type="text" name="localAddressRoomNumber" [(ngModel)]="personData.roomNumber"
+                                    (ngModelChange)="updatePersonalData(personData)">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="local-address-row-2">
+                <div class="input-group">
+                    <label class="personal-data-input-label" for="alternateEmail">Alternate Email</label>
+                    <mat-form-field id="alternate-email-input" appearance="fill">
+                        <input matInput type="text" name="alternateEmail" [(ngModel)]="personData.alternateEmail"
+                            (ngModelChange)="updatePersonalData(personData)">
+                    </mat-form-field>
+                </div>
+
+                <div class="input-group">
+                    <label class="personal-data-input-label" for="campusEmail">Campus Email</label>
+                    <mat-form-field id="campus-email-input" appearance="fill">
+                        <input matInput type="text" name="campusEmail" [(ngModel)]="personData.campusEmail"
+                            (ngModelChange)="updatePersonalData(personData)">
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

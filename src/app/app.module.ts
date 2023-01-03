@@ -18,10 +18,12 @@ import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule, Routes } from '@angular/router';
 import { ThesisSearchComponent } from './thesis-search/thesis-search.component';
+import { PersonalDataComponent } from './personal-data/personal-data.component';
 
 const routes: Routes = [
   { path: 'e-reader', component: EReaderComponent },
   { path: '', component: AnnouncementsComponent },
+  { path: 'personal-data', component: PersonalDataComponent }
 ];
 
 @NgModule({
@@ -32,6 +34,7 @@ const routes: Routes = [
     AnnouncementsComponent,
     EReaderComponent,
     ThesisSearchComponent,
+    PersonalDataComponent,
   ],
   imports: [
     BrowserModule,

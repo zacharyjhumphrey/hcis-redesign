@@ -19,8 +19,11 @@ export class AppComponent {
   }, {
     name: 'eReader',
     route: '/e-reader'
+  }, {
+    name: 'Personal Data',
+    route: '/personal-data'
   }];
-  
+// TODO Resize everything with em
   constructor() {
     // getAnnouncementsTab()
   }
