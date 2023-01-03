@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { getReadingsFromAllClasses } from 'src/vendor/backend-interface';
 import { Reading } from '../../common';
 import { BackendServiceService } from '../backend-service.service';
 
@@ -18,7 +17,7 @@ export class EReaderComponent implements OnInit {
   searchValue: string;
 
   constructor(private backendService: BackendServiceService) {
-    this.allReadings = getReadingsFromAllClasses();
+    this.allReadings = this.backendService.getAllReadings();
     this.professors = [...new Set(this.allReadings.map(reading => reading.professor).filter(prof => prof != ''))];
     this.classes = [...new Set(this.allReadings.map(reading => reading.class).filter(className => className != ''))];
     this.selectedClass = '';

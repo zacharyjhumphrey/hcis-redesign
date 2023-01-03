@@ -1,8 +1,8 @@
-<!-- <form>
+<form>
     <mat-form-field id="search-value" appearance="fill">
         <mat-label>Search Readings...</mat-label>
         <input matInput type="text" name="searchValue" [(ngModel)]="searchValue"
-            (ngModelChange)="updateFilteredReadings()">
+            (ngModelChange)="searchTheses(searchValue, searchConnectTerm)">
         <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
             <mat-icon>close</mat-icon>
         </button>
@@ -10,13 +10,11 @@
 </form>
 
 <mat-list role="list">
-    <mat-list-item *ngFor="let reading of filteredReadings" role="listitem" (click)="openReading(reading)"
+    <mat-list-item *ngFor="let thesis of fetchedTheses" role="listitem" (click)="openThesisFile(thesis)"
         class="class-reading">
-        <mat-icon mat-list-icon>folder</mat-icon>
-        <p mat-line>{{ reading.title }}</p>
-        <p mat-line> {{ reading.author }} </p>
-        <p mat-line> {{ reading.professor }} </p>
-        <p mat-line> {{ reading.class }} </p>
+        <mat-icon *ngIf="thesis.fileLink" mat-list-icon>folder</mat-icon>
+        <p mat-line>{{ thesis.title }}</p>
+        <p mat-line> {{ thesis.author }} </p>
         <mat-divider></mat-divider>
     </mat-list-item>
-</mat-list> -->
+</mat-list>

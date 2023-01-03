@@ -22,6 +22,10 @@ export class AppComponent {
   }, {
     name: 'Personal Data',
     route: '/personal-data'
+  },
+  {
+    name: 'Thesis Search',
+    route: '/thesis-search'
   }];
 // TODO Resize everything with em
   constructor() {

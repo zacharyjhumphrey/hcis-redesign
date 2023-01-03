@@ -27,3 +27,9 @@ export interface Reading {
     title: string;
     URL: string;
 }
+
+export interface Thesis {
+    author: string;
+    title: string;
+    fileLink: string;
+}

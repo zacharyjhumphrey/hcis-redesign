@@ -1,6 +1,5 @@
-import { ComponentFactoryResolver } from "@angular/core";
 import * as $ from "jquery";
-import { AnnouncementsItem, AnnouncementsSection, Reading } from '../common';
+import { AnnouncementsItem, AnnouncementsSection, Reading, Thesis } from '../common';
 
 //  https://honors.uca.edu/hcis/stu/stuPage950.inc.php?cmd=tabWrite&pageTab=950
 const HOME_RESPONSE = `
@@ -36,229 +35,6 @@ const HOME_RESPONSE = `
 <div class="emItem"><b>Focus on a Fellowship</b> - U.S. Student Fulbright awards are an exciting ticket to one academic year spent abroad, all expenses paid, after your undergrad degree is in hand. Several hundred awards to some 130 countries are available annually to study, conduct research, or teach English. Applications are due in early fall, with notifications made the following spring. UCA Honors students have done well in this competition – maybe you’ll be next! Us.fulbrightonline.org</div>
 </div>
 <div class="newline" style="padding-bottom:12px;"></div>
-</div>
-`
-
-const SENIOR_SEMINAR_PAGE = `<div id="navBarWrap">
-<div id="navBar">
-<div id="t_1310" class="navTab" onclick="ajaxSend('t_1310','/hcis/stu/stuPage901.inc.php?cmd=contents','formData');">
-<input type="hidden" name="tab" value="1310" id="iid_tab"/>
-<input type="hidden" name="sendTab" value="901" id="iid_sendTab"/>
-<input type="hidden" name="secToken" value="75758d08cf24f0df47d1876b9f09818d" id="iid_secToken"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-Core I</div>
-<div id="t_1320" class="navTab" onclick="ajaxSend('t_1320','/hcis/stu/stuPage901.inc.php?cmd=contents','formData');">
-<input type="hidden" name="tab" value="1320" id="iid_tab"/>
-<input type="hidden" name="sendTab" value="901" id="iid_sendTab"/>
-<input type="hidden" name="secToken" value="75758d08cf24f0df47d1876b9f09818d" id="iid_secToken"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-Core II</div>
-<div id="t_2310" class="navTab" onclick="ajaxSend('t_2310','/hcis/stu/stuPage901.inc.php?cmd=contents','formData');">
-<input type="hidden" name="tab" value="2310" id="iid_tab"/>
-<input type="hidden" name="sendTab" value="901" id="iid_sendTab"/>
-<input type="hidden" name="secToken" value="75758d08cf24f0df47d1876b9f09818d" id="iid_secToken"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-Core III</div>
-<div id="t_2320" class="navTab" onclick="ajaxSend('t_2320','/hcis/stu/stuPage901.inc.php?cmd=contents','formData');">
-<input type="hidden" name="tab" value="2320" id="iid_tab"/>
-<input type="hidden" name="sendTab" value="901" id="iid_sendTab"/>
-<input type="hidden" name="secToken" value="75758d08cf24f0df47d1876b9f09818d" id="iid_secToken"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-Core IV</div>
-<div id="t_3310" class="navTab" onclick="ajaxSend('t_3310','/hcis/stu/stuPage901.inc.php?cmd=contents','formData');">
-<input type="hidden" name="tab" value="3310" id="iid_tab"/>
-<input type="hidden" name="sendTab" value="901" id="iid_sendTab"/>
-<input type="hidden" name="secToken" value="75758d08cf24f0df47d1876b9f09818d" id="iid_secToken"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-Jr Seminar</div>
-<div id="t_4310" class="navTabSelected" onclick="ajaxSend('t_4310','/hcis/stu/stuPage901.inc.php?cmd=contents','formData');">
-<input type="hidden" name="tab" value="4310" id="iid_tab"/>
-<input type="hidden" name="sendTab" value="901" id="iid_sendTab"/>
-<input type="hidden" name="secToken" value="75758d08cf24f0df47d1876b9f09818d" id="iid_secToken"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-Sr Seminar</div>
-<div id="t_3320" class="navTab" onclick="ajaxSend('t_3320','/hcis/stu/stuPage901.inc.php?cmd=contents','formData');">
-<input type="hidden" name="tab" value="3320" id="iid_tab"/>
-<input type="hidden" name="sendTab" value="901" id="iid_sendTab"/>
-<input type="hidden" name="secToken" value="75758d08cf24f0df47d1876b9f09818d" id="iid_secToken"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-Tutorial</div>
-<div id="t_4320" class="navTab" onclick="ajaxSend('t_4320','/hcis/stu/stuPage901.inc.php?cmd=contents','formData');">
-<input type="hidden" name="tab" value="4320" id="iid_tab"/>
-<input type="hidden" name="sendTab" value="901" id="iid_sendTab"/>
-<input type="hidden" name="secToken" value="75758d08cf24f0df47d1876b9f09818d" id="iid_secToken"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-Thesis</div>
-<div id="t_5000" class="navTab" onclick="ajaxSend('t_5000','/hcis/stu/stuPage901.inc.php?cmd=contents','formData');">
-<input type="hidden" name="tab" value="5000" id="iid_tab"/>
-<input type="hidden" name="sendTab" value="901" id="iid_sendTab"/>
-<input type="hidden" name="secToken" value="75758d08cf24f0df47d1876b9f09818d" id="iid_secToken"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-Other</div>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<div class="navTab" style="float:right;" onclick="__checkClock();ajaxSend('navBarWrap','stu/stuPage040.inc.php?cmd=tabWrite&amp;pageTab=040','formData');">HCIS</div>
-<div style="text-align:center;float:right;height:30px;"></div>
-</div>
-<div class="newline" style="padding-bottom:12px;"></div>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="sendTab" value="901" id="iid_sendTab"/>
-<input type="hidden" name="secToken" value="75758d08cf24f0df47d1876b9f09818d" id="iid_secToken"/>
-</div>
-<div id="readContent">
-<style type='text/css'>
-.shad { border:2px solid #666;margin:6px auto;border-radius:6px;box-shadow:3px 3px 6px #888;}
-</style>
-<div class="w700 shadowed pb9" style="background-color:#e8e8e8;">
-<div class="formShow" id="collection130_on" style="display:block;" onclick="toggleHeaderDiv(this,'collection130','collection130')">Sr Sem: Democracy, Decision-Making, and the Examined Life<dfn>Doug Corbitt</dfn></div>
-<div class="formHide" id="collection130_off" style="display:none;" onclick="toggleHeaderDiv(this,'collection130','collection130')">Sr Sem: Democracy, Decision-Making, and the Examined Life<dfn>Doug Corbitt</dfn></div>
-<div id="collection130" style="display:none;" class="w550 shadowed pb9">
-<div id="lsyl_2779" class="RecordListAlt1" onclick="ajaxNewWindow('lsyl_2779','cabViewer.php?file=syllabi/syl_2779_20221008_115928.pdf&amp;type=application/pdf&amp;drawer=3256');">Course Syllabus</div>
-<div id="ref_43101316" class="RecordListAlt2" onclick="ajaxNewWindow('ref_43101316','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-The Radical Dignity of Malcolm X<dfn class="author">Peniel E. Joseph</dfn>
-<input type="hidden" name="eref" value="43101316" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-<div id="ref_43101317" class="RecordListAlt1" onclick="ajaxNewWindow('ref_43101317','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-The Radical Citizenship of Martin Luther King<dfn class="author">Peniel E. Joseph</dfn>
-<input type="hidden" name="eref" value="43101317" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-<div id="ref_43101318" class="RecordListAlt2" onclick="ajaxNewWindow('ref_43101318','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-Renewing the American Democratic Faith<dfn class="author">Stephen C. Rockefeller</dfn>
-<input type="hidden" name="eref" value="43101318" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-<div id="ref_43101319" class="RecordListAlt1" onclick="ajaxNewWindow('ref_43101319','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-What Black Women Teach Us About Democracy<dfn class="author">Andra Gillespie and Nadia E. Brown</dfn>
-<input type="hidden" name="eref" value="43101319" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-<div id="ref_43101320" class="RecordListAlt2" onclick="ajaxNewWindow('ref_43101320','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-Keeping the Republic<dfn class="author">Dan Moulthrop</dfn>
-<input type="hidden" name="eref" value="43101320" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-<div id="ref_43101323" class="RecordListAlt1" onclick="ajaxNewWindow('ref_43101323','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-Building a University Where All People Matter<dfn class="author">Michael M. Crow et al.</dfn>
-<input type="hidden" name="eref" value="43101323" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-</div>
-<div class="formShow" id="collection69_on" style="display:block;" onclick="toggleHeaderDiv(this,'collection69','collection69')">Sr Sem: Consciousness: The Search for Self and Community Revisited<dfn>Adam Frank</dfn></div>
-<div class="formHide" id="collection69_off" style="display:none;" onclick="toggleHeaderDiv(this,'collection69','collection69')">Sr Sem: Consciousness: The Search for Self and Community Revisited<dfn>Adam Frank</dfn></div>
-<div id="collection69" style="display:none;" class="w550 shadowed pb9">
-<div class="formShow" id="section690_on" style="display:block;" onclick="toggleHeaderDiv(this,'section690','section690')">Theories of Consciousness</div>
-<div class="formHide" id="section690_off" style="display:none;" onclick="toggleHeaderDiv(this,'section690','section690')">Theories of Consciousness</div>
-<div id="section690" style="display:none;" class="w400 shadowed p3">
-<div id="ref_43100886" class="RecordListAlt2" onclick="ajaxNewWindow('ref_43100886','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-Facing Up to the Problem of Consciousness<dfn class="author">David Chalmers</dfn>
-<input type="hidden" name="eref" value="43100886" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-<div id="ref_43100887" class="RecordListAlt1" onclick="ajaxNewWindow('ref_43100887','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-Review of Journal of Consciousness Studies<dfn class="author">David Chalmers</dfn>
-<input type="hidden" name="eref" value="43100887" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-<div id="ref_43100909" class="RecordListAlt2" onclick="ajaxNewWindow('ref_43100909','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-Hallucinogens and Rock Art<dfn class="author">Hopman</dfn>
-<input type="hidden" name="eref" value="43100909" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-</div>
-<div class="formShow" id="section691_on" style="display:block;" onclick="toggleHeaderDiv(this,'section691','section691')">Consciousness and Community</div>
-<div class="formHide" id="section691_off" style="display:none;" onclick="toggleHeaderDiv(this,'section691','section691')">Consciousness and Community</div>
-<div id="section691" style="display:none;" class="w400 shadowed p3">
-<div id="ref_43100908" class="RecordListAlt1" onclick="ajaxNewWindow('ref_43100908','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-Journey to Ixtlan<dfn class="author">Castaneda</dfn>
-<input type="hidden" name="eref" value="43100908" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-<div id="ref_43100917" class="RecordListAlt2" onclick="ajaxNewWindow('ref_43100917','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-Paleolithic Technology and Human Evolution<dfn class="author">Ambrose</dfn>
-<input type="hidden" name="eref" value="43100917" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-<div id="ref_23200499" class="RecordListAlt1" onclick="ajaxNewWindow('ref_23200499','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-Global Chinatown<dfn class="author">Adam Frank</dfn>
-<input type="hidden" name="eref" value="23200499" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-<div id="ref_43100925" class="RecordListAlt2" onclick="ajaxNewWindow('ref_43100925','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-Moroccan Gnawa and Transglobal Trance<dfn class="author">Deborah Kapchan</dfn>
-<input type="hidden" name="eref" value="43100925" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-</div>
-<div class="formShow" id="section692_on" style="display:block;" onclick="toggleHeaderDiv(this,'section692','section692')">Consciousness and the Brain</div>
-<div class="formHide" id="section692_off" style="display:none;" onclick="toggleHeaderDiv(this,'section692','section692')">Consciousness and the Brain</div>
-<div id="section692" style="display:none;" class="w400 shadowed p3">
-</div>
-<div class="formShow" id="section693_on" style="display:block;" onclick="toggleHeaderDiv(this,'section693','section693')">Consciousness and Disability</div>
-<div class="formHide" id="section693_off" style="display:none;" onclick="toggleHeaderDiv(this,'section693','section693')">Consciousness and Disability</div>
-<div id="section693" style="display:none;" class="w400 shadowed p3">
-<div id="ref_23100774" class="RecordListAlt1" onclick="ajaxNewWindow('ref_23100774','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-Sensory Impairment<dfn class="author">Hadder and Keating</dfn>
-<input type="hidden" name="eref" value="23100774" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-</div>
-<div class="formShow" id="section694_on" style="display:block;" onclick="toggleHeaderDiv(this,'section694','section694')">Social Consciousness</div>
-<div class="formHide" id="section694_off" style="display:none;" onclick="toggleHeaderDiv(this,'section694','section694')">Social Consciousness</div>
-<div id="section694" style="display:none;" class="w400 shadowed p3">
-<div id="ref_43100708" class="RecordListAlt2" onclick="ajaxNewWindow('ref_43100708','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-How to Live Your Dream of Volunteering Overseas<dfn class="author">Joseph Collins</dfn>
-<input type="hidden" name="eref" value="43100708" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-</div>
-</div>
-<div class="formShow" id="collection136_on" style="display:block;" onclick="toggleHeaderDiv(this,'collection136','collection136')">Sr Sem: Inquiry, Work, and Self-Discovery<dfn>Donna Bowman</dfn></div>
-<div class="formHide" id="collection136_off" style="display:none;" onclick="toggleHeaderDiv(this,'collection136','collection136')">Sr Sem: Inquiry, Work, and Self-Discovery<dfn>Donna Bowman</dfn></div>
-<div id="collection136" style="display:none;" class="w550 shadowed pb9">
-<div id="ref_43101205" class="RecordListAlt1" onclick="ajaxNewWindow('ref_43101205','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-Service on the Campus: The Free University Movement and Educational Reform<dfn class="author">Paul Lauter and Florence Howe</dfn>
-<input type="hidden" name="eref" value="43101205" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-<div id="ref_43101345" class="RecordListAlt2" onclick="ajaxNewWindow('ref_43101345','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-What Is School For?<dfn class="author">New York Times</dfn>
-<input type="hidden" name="eref" value="43101345" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-<div id="ref_43101341" class="RecordListAlt1" onclick="ajaxNewWindow('ref_43101341','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-The Academy on the Firing Line<dfn class="author">John J. Laukaitis</dfn>
-<input type="hidden" name="eref" value="43101341" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-<div id="ref_43101342" class="RecordListAlt2" onclick="ajaxNewWindow('ref_43101342','/hcis/stu/stuPage901.inc.php?cmd=print&amp;sendTab=901');">
-Bookends of the Twentieth Century: Irving Babbitt, E.D. Hirsch, and the Humanistic Curriculum<dfn class="author">Kipton D. Smilie</dfn>
-<input type="hidden" name="eref" value="43101342" id="iid_eref"/>
-<input type="hidden" name="referTab" value="040" id="iid_referTab"/>
-<input type="hidden" name="pageTab" value="901" id="iid_pageTab"/>
-</div>
-</div>
-</div>
-</div>
-<div class="newline"></div>
 </div>
 `
 
@@ -316,7 +92,7 @@ const getAnnouncementsItems = ($emSection: JQuery): AnnouncementsItem[] => {
     return toReturn;
 }
 
-export const getReadingsFromAllClasses = (html: string = SENIOR_SEMINAR_PAGE): Reading[] => {
+export const getReadingsFromAllClasses = (html: string): Reading[] => {
     const $html = $('<div></div>').html(html);
     const $readContent = $html.find("#readContent > div");
     return getReadingsFromClass($readContent, "TEST TEST");
@@ -390,4 +166,19 @@ const splitElementsByHeadClassName = ($parent: JQuery, header: string): JQuery[]
         })
         return $tempParent;
     });
+}
+
+export const getThesesFromResponse = (response: string): Thesis[] => {
+    let $content = $('<div></div>').html(response);
+    let toReturn: Thesis[] = [];
+    let $allTheses = $content.find(".RecordListAlt3,.RecordListAlt4");
+    $allTheses.each((i, thesis) => {
+        let $thesis = $(thesis);
+        toReturn.push({
+            title: $thesis.find(".w600").clone().children().remove().end().text(),
+            author: $thesis.find("i").text(),
+            fileLink: ""
+        })
+    })
+    return toReturn;
 }

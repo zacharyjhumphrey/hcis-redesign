@@ -23,7 +23,8 @@ import { PersonalDataComponent } from './personal-data/personal-data.component';
 const routes: Routes = [
   { path: 'e-reader', component: EReaderComponent },
   { path: '', component: AnnouncementsComponent },
-  { path: 'personal-data', component: PersonalDataComponent }
+  { path: 'personal-data', component: PersonalDataComponent },
+  { path: 'thesis-search', component: ThesisSearchComponent }
 ];
 
 @NgModule({

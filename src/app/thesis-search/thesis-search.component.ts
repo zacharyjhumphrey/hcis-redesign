@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Thesis } from 'src/common';
+import { BackendServiceService } from '../backend-service.service';
 
 @Component({
   selector: 'app-thesis-search',
@@ -6,10 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./thesis-search.component.sass']
 })
 export class ThesisSearchComponent implements OnInit {
+  fetchedTheses: Thesis[];
+  searchValue: string;
+  searchConnectTerm: "AND" | "OR" = "AND";
 
-  constructor() { }
+  constructor(private backendService: BackendServiceService) {
+    this.fetchedTheses = this.backendService.getThesisWithSearchTerm("", "AND");
+    this.searchValue = '';
+  }
 
   ngOnInit(): void {
   }
 
+  searchTheses = (searchTerm: string, searchConnectTerm: "AND" | "OR") => {
+    this.fetchedTheses = this.backendService.getThesisWithSearchTerm(searchTerm, searchConnectTerm);
+  }
+
+  openThesisFile = (clickedThesis: Thesis) => {
+    if (!clickedThesis.fileLink) {
+      return;
+    }
+    // open(clickedThesis.fileLink);
+  }
 }
