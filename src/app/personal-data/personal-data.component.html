@@ -82,19 +82,19 @@
                     </div>
 
                     <div id="address-lines-input-group">
-                        <div id="city-input-group" class="input-group">
+                        <div class="input-group">
                             <label class="personal-data-input-label">Address</label>
-                            <mat-form-field id="local-address-line-1-input" appearance="fill">
+                            <mat-form-field appearance="fill">
                                 <input matInput type="text" name="localAddressLine1"
                                     [(ngModel)]="personData.localAddressLine1"
                                     (ngModelChange)="updatePersonalData(personData)">
                             </mat-form-field>
-                            <mat-form-field id="local-address-line-2-input" appearance="fill">
+                            <mat-form-field appearance="fill">
                                 <input matInput type="text" name="localAddressLine2"
                                     [(ngModel)]="personData.localAddressLine2"
                                     (ngModelChange)="updatePersonalData(personData)">
                             </mat-form-field>
-                            <mat-form-field id="local-address-line-3-input" appearance="fill">
+                            <mat-form-field appearance="fill">
                                 <input matInput type="text" name="localAddressLine3"
                                     [(ngModel)]="personData.localAddressLine3"
                                     (ngModelChange)="updatePersonalData(personData)">
@@ -161,6 +161,78 @@
                 </div>
             </div>
 
+        </div>
+
+        <div>
+            <p class="personal-data-subheading">Permanent Address</p>
+        
+            <div id="permanent-address-row-1">
+                <div class="row-1-col">
+                    <div id="permanent-city-zip-input-group">
+                        <div id="permanent-city-input-group" class="input-group">
+                            <label class="personal-data-input-label" for="permanentAddressCity">City</label>
+                            <mat-form-field id="permanent-address-city-input" appearance="fill">
+                                <input matInput type="text" name="permanentAddressCity"
+                                    [(ngModel)]="personData.permanentAddressCity"
+                                    (ngModelChange)="updatePersonalData(personData)">
+                            </mat-form-field>
+                        </div>
+        
+                        <div id="permanent-zip-input-group" class="input-group">
+                            <label class="personal-data-input-label" for="permanentAddressZIP">ZIP</label>
+                            <mat-form-field id="permanent-address-zip-input" appearance="fill">
+                                <input matInput type="text" name="permanentAddressZIP" [(ngModel)]="personData.permanentAddressZIP"
+                                    (ngModelChange)="updatePersonalData(personData)">
+                            </mat-form-field>
+                        </div>
+                    </div>
+        
+                    <div class="address-lines-input-group">
+                        <div class="input-group">
+                            <label class="personal-data-input-label">Address</label>
+                            <mat-form-field appearance="fill">
+                                <input matInput type="text" name="permanentAddressLine1" [(ngModel)]="personData.permanentAddressLine1"
+                                    (ngModelChange)="updatePersonalData(personData)">
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <input matInput type="text" name="permanentAddressLine2" [(ngModel)]="personData.permanentAddressLine2"
+                                    (ngModelChange)="updatePersonalData(personData)">
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <input matInput type="text" name="permanentAddressLine3" [(ngModel)]="personData.permanentAddressLine3"
+                                    (ngModelChange)="updatePersonalData(personData)">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="row-1-col">
+                    <div class="input-group">
+                        <label class="personal-data-input-label" for="permanentAddressPhone">Phone</label>
+                        <mat-form-field appearance="fill">
+                            <input matInput type="text" name="permanentAddressPhone" [(ngModel)]="personData.permanentAddressPhone"
+                                (ngModelChange)="updatePersonalData(personData)">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="personal-data-input-label" for="permanentAddressCellPhone">Cell Phone</label>
+                        <mat-form-field appearance="fill">
+                            <input matInput type="text" name="permanentAddressCellPhone" [(ngModel)]="personData.permanentAddressCellPhone"
+                                (ngModelChange)="updatePersonalData(personData)">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="personal-data-input-label" for="permanentAddressState">State</label>
+                        <mat-form-field appearance="fill">
+                            <input matInput type="text" name="permanentAddressState" [(ngModel)]="personData.permanentAddressState"
+                                (ngModelChange)="updatePersonalData(personData)">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        
         </div>
     </form>
 </div>

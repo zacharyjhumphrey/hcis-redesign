@@ -16,7 +16,9 @@ export interface PersonalData {
     localAddressZIP: number,
     localAddressPhone: string,
     localAddressCellPhone: string,
-    permanentAddress: string,
+    permanentAddressLine1: string,
+    permanentAddressLine2: string,
+    permanentAddressLine3: string,
     permanentAddressCity: string,
     permanentAddressState: string,
     permanentAddressPhone: string,
@@ -24,7 +26,7 @@ export interface PersonalData {
     permanentAddressCellPhone: string
 }
 
-// TODO ?
+// TODO Create an interface for what HCIS expects in the backend. middleware interface
 export interface OldHCISZIP {
     LastName: string,
     FirstName: string,
