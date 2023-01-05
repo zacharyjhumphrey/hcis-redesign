@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getReadingsFromAllClasses } from 'src/vendor/backend-interface';
+import { BackendServiceService } from '../backend-service.service';
 
 @Component({
   selector: 'app-announcements',
@@ -7,7 +7,8 @@ import { getReadingsFromAllClasses } from 'src/vendor/backend-interface';
   styleUrls: ['./announcements.component.sass']
 })
 export class AnnouncementsComponent implements OnInit {
-  constructor() {
+  constructor(private backendService: BackendServiceService) {
+    // this.backendService.postLogin("zachjhumphrey", INSERT PASSWORD HERE).subscribe(res => console.log(res));
   }
 
   ngOnInit(): void {

@@ -1,0 +1,17 @@
+Login Request - Sends username and hashed pw
+    reponse - initial page
+
+Cookies
+- stuacc
+    sends URL encoded timestamp of when the user should be logged out (20 mins after they visit a new page)
+    for example, logging in at 5:51pm. store stuacc cookie of 18%3A10%3A33 (18:10:33)
+- stuSESSION
+    consistent with the session of the user
+    examples: pddujur31bnctl4f4o1n8pfc23, gru23baobjb5s2fnll9qgtbnes, t5537qq1mr534t0stt8p8101tr
+
+FOR TESTING: 
+- run: "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp
+
+PASSWORD ENCRYPTION: 
+- uses MD5 encoding
+    exmaple: MD5("testing") => "ae2b1fca515949e5d54fb22b8ed95575"

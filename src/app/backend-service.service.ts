@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { getReadingsFromAllClasses, getThesesFromResponse } from 'src/vendor/backend-interface';
 import { Thesis } from 'src/common';
+import * as md5 from 'md5';
 
 const THESIS_SEARCH_PAGE = `<div id="pageBar">
 <div id="idcRecs">19 matching records found</div>
@@ -533,6 +534,20 @@ Bookends of the Twentieth Century: Irving Babbitt, E.D. Hirsch, and the Humanist
 })
 export class BackendServiceService {
   constructor(private http: HttpClient) { }
+
+  postLogin = (username: string, password: string) => {
+    let body = new URLSearchParams();
+    body.set('logPg', '3');
+    body.set('uname', username);
+    body.set('pwaenc', md5(password));
+
+    return this.http.post("https://honors.uca.edu/hcis/stu/stuPage101.inc.php", body.toString(), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      responseType: 'text'
+    })
+  }
 
   getCrazyQuotes = () => {
     return this.http.get("https://honors.uca.edu/hcis/stu/stuPage666.inc.php?cmd=tabWrite&pageTab=666");
