@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AnnouncementsTab } from 'src/common';
 import { BackendServiceService } from '../backend-service.service';
 
 @Component({
@@ -7,8 +8,11 @@ import { BackendServiceService } from '../backend-service.service';
   styleUrls: ['./announcements.component.sass']
 })
 export class AnnouncementsComponent implements OnInit {
+  pageData: AnnouncementsTab;
+
   constructor(private backendService: BackendServiceService) {
-    // this.backendService.postLogin("zachjhumphrey", INSERT PASSWORD HERE).subscribe(res => console.log(res));
+    this.pageData = this.backendService.getAnnouncementsData();
+    console.log(this.pageData);
   }
 
   ngOnInit(): void {

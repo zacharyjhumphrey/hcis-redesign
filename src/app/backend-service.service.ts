@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { getReadingsFromAllClasses, getThesesFromResponse } from 'src/vendor/backend-interface';
+import { getAnnouncementsTab, getNavTabs, getReadingsFromAllClasses, getThesesFromResponse } from 'src/vendor/backend-interface';
 import { Thesis } from 'src/common';
 import * as md5 from 'md5';
 
@@ -529,11 +529,49 @@ Bookends of the Twentieth Century: Irving Babbitt, E.D. Hirsch, and the Humanist
 </div>
 `
 
+//  https://honors.uca.edu/hcis/stu/stuPage950.inc.php?cmd=tabWrite&pageTab=950
+const HOME_RESPONSE = `
+<div id="tabContent" style="padding:5px;">
+<div id="did_sec">
+<input type="hidden" name="referTab" value="040" id="iid_referTab">
+<input type="hidden" name="sendTab" value="040" id="iid_sendTab">
+<input type="hidden" name="secToken" value="75758d08cf24f0df47d1876b9f09818d" id="iid_secToken">
+</div>
+	<style>	
+		a:link		{	color: #00f;	text-decoration: none;	}
+		a:visited	{	color: #00f;	text-decoration: none;	} 
+		a:active 	{	color: #f00;}
+		a:hover		{	color: #f00;	text-decoration: underline;	}
+
+		.emWrap { width: auto; border: 1px black solid; background-color: #f8f8f8; margin:auto; padding: 20px;	}
+//		.emWrap { width: 700px; border: 1px black solid; background-color: #f8f8f8; margin:auto; padding: 20px;	}
+		.emHead {font-size:18px;font-weight:bold;padding:4px;font-family:serif;font-variant:small-caps;}
+		.emSection {font-size:15px;font-weight:bold;color:#818a8f ;border-style: solid;border-width:6px 0;border-color:#006b54;padding: 2px; margin:10px; }
+		.emDate {font-size: 14px;color: #26354a; font-weight:bold;font-variant:small-caps;text-decoration: underline;padding:3px 0 3px 10px; }
+		.emLocation {font-size: 14px;color: #26354a; font-variant:small-caps;padding:0px 0 3px 10px; }
+		.emItem {font-size: 12px; padding: 0px 25px 15px 25px;  }
+		.emNL {line-height:50%;}
+		</style><div class="emWrap">
+<div class="emHead">Schedler Honors College Calendar</div>
+<div class="emHead">Sunday, November 6, 2022</div>
+<div class="emSection">Events</div>
+<div class="emDate">Friday, November 11, 2022 - 6:00 PM</div><div class="emLocation">HPER, large studio, 2nd floor</div><div class="emItem"><b>Dancing Bears Contra</b> - Join us for the third Dancing Bears Contra Dance of the fall with live music by the Faulkner County Good Time Band.<br><br class="emNL">Callers: Ellen <br><br class="emNL">Dancers: Y’all!<br><br class="emNL">HPER: 6:00 pm Beginners Lesson. 6:30-8:30 pm - Dance.<br><br class="emNL">Come alone or bring some friends. It’s all good. Gender neutral and totally inclusive.<br><br class="emNL">If you want to bring a non-UCA guest, you are welcome to do so. Be sure to follow the HPER’s guest policy. If you’re unsure if you want to dance, have a seat and enjoy the band. <br><br class="emNL">What is contra dance? Pretty much what you’d get if a square dance married a swing dance. It’s hoots and hollers, laughter and smiles. Community folk dance. Everyone can do it. No prior experience necessary.  Learn more here: <br><br class="emNL"><a href="https://vimeo.com/316215468" target="_blank">https://vimeo.com/316215468</a><br><br class="emNL">Upcoming Dances: December 2nd.<br><br class="emNL">Supported in part by the Gadd/Merrill Fund of the Country Dance and Song Society, the UCA Honors College, and Innovation Media Corp.</div>
+<div class="emDate">Friday, November 11, 2022 - 3:00 PM</div><div class="emLocation">Farris Presentation Room</div><div class="emItem"><b>Soapbox</b> - Hypatia Meraviglia: The human relationship with the natural world. A discussion of what has damaged the human-nature relationship, as well as how we can strengthen it.</div>
+<div class="emSection">Announcements</div>
+<div class="emItem"><b>Wakanda Forever Ticket Pick-up</b> - Honors has bought out a theater for opening night of Wakanda Forever at Conway’s Cinemark. Tickets will be available for pick-up in the honors office beginning Monday, November 7 at 8:30 a.m. <br><br class="emNL">Tickets can be picked up 1 per honors student on Monday and Tuesday, 8:30-4:00, then on Wednesday at 8:30, we’ll begin distributing a second ticket for a single non-honors guest if any tickets remain.</div>
+<div class="emItem"><b>SHC Council Sweatshirt orders</b> - SHC Council is taking sweatshirt orders through November 9th: <br><br class="emNL"><a href="http://honors-center-society.square.site/" target="_blank">http://honors-center-society.square.site/</a></div>
+<div class="emItem"><b>Focus on a Fellowship</b> - U.S. Student Fulbright awards are an exciting ticket to one academic year spent abroad, all expenses paid, after your undergrad degree is in hand. Several hundred awards to some 130 countries are available annually to study, conduct research, or teach English. Applications are due in early fall, with notifications made the following spring. UCA Honors students have done well in this competition – maybe you’ll be next! Us.fulbrightonline.org</div>
+</div>
+<div class="newline" style="padding-bottom:12px;"></div>
+</div>
+`
+
 @Injectable({
   providedIn: 'root'
 })
 export class BackendServiceService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   postLogin = (username: string, password: string) => {
     let body = new URLSearchParams();
@@ -568,5 +606,12 @@ export class BackendServiceService {
     let response = THESIS_SEARCH_PAGE;
 
     return getThesesFromResponse(response);
+  }
+
+  getAnnouncementsData = () => {
+    // let response = this.http.post()
+    let response = HOME_RESPONSE;
+
+    return getAnnouncementsTab(response);
   }
 }
