@@ -4,6 +4,9 @@ import { getAnnouncementsTab, getNavTabs, getReadingsFromAllClasses, getThesesFr
 import { Thesis } from 'src/common';
 import * as md5 from 'md5';
 
+const DEVELOPMENT_SERVER_URL = 'https://f9c95a77-fcb2-4d91-9c04-6012b8d677ea.mock.pstmn.io';
+const PRODUCTION_SERVER_URL = 'https://honors.uca.edu'
+
 const THESIS_SEARCH_PAGE = `<div id="pageBar">
 <div id="idcRecs">19 matching records found</div>
 <div class="newline"></div>
@@ -570,7 +573,10 @@ const HOME_RESPONSE = `
   providedIn: 'root'
 })
 export class BackendServiceService {
+  BACKEND_URL = DEVELOPMENT_SERVER_URL;
+
   constructor(private http: HttpClient) {
+
   }
 
   postLogin = (username: string, password: string) => {
@@ -583,6 +589,7 @@ export class BackendServiceService {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
+      observe: 'response',
       responseType: 'text'
     })
   }
@@ -614,4 +621,33 @@ export class BackendServiceService {
 
     return getAnnouncementsTab(response);
   }
+
+  // TODO Find a way to send the Cookie header with a request
+  getEReaderTab = (classTabNumber: number = 3320) => {
+    let body = new URLSearchParams();
+    body.set('tab', classTabNumber.toString());
+    body.set('sendTab', "901");
+    body.set('secToken', "1bf5235d32033acf4c0b734bcd1e28e7");
+    body.set('referTab', "040");
+
+    return this.http.post(`https://honors.uca.edu/hcis/stu/stuPage901.inc.php?cmd=contents`, body.toString(), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Cookie': 'stuSESSION=ljkasdl; SameSite=None'
+      },
+      observe: 'response',
+      responseType: 'text',
+      withCredentials: true
+    })
+  }
+
+  getEReaderCoreIReadings = () => this.getEReaderTab(1310);
+  getEReaderCoreIIReadings = () => this.getEReaderTab(1320);
+  getEReaderCoreIIIReadings = () => this.getEReaderTab(2310);
+  getEReaderCoreIVReadings = () => this.getEReaderTab(2320);
+  getEReaderJuniorSeminarReadings = () => this.getEReaderTab(3310);
+  getEReaderSeniorSeminarReadings = () => this.getEReaderTab(4310);
+  getEReaderTutorialReadings = () => this.getEReaderTab(3320);
+  getEReaderThesisReadings = () => this.getEReaderTab(4320);
+  getEReaderOtherReadings = () => this.getEReaderTab(5000);
 }

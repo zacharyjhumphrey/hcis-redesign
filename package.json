@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^14.1.0",
     "@angular/router": "^14.1.0",
     "connect": "^3.7.0",
+    "dotenv": "^16.0.3",
     "jquery": "^3.6.1",
     "md5": "^2.3.0",
     "rxjs": "~7.5.0",

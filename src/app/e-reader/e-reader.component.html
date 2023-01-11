@@ -1,9 +1,9 @@
 <form>
     <mat-form-field id="search-value" appearance="fill">
         <mat-label>Search Readings...</mat-label>
-        <input matInput type="text" name="searchValue" [(ngModel)]="searchValue"
+        <input matInput type="text" name="searchValue" [(ngModel)]="searchParameters.searchValue"
             (ngModelChange)="updateFilteredReadings()">
-        <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+        <button *ngIf="searchParameters.searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchParameters.searchValue=''">
             <mat-icon>close</mat-icon>
         </button>
     </mat-form-field>
@@ -11,7 +11,7 @@
     <div id="search-select-row">
         <mat-form-field appearance="fill">
             <mat-label>Class</mat-label>
-            <mat-select name="selectedClass" [(ngModel)]="selectedClass" (ngModelChange)="updateFilteredReadings()">
+            <mat-select name="selectedClass" [(ngModel)]="searchParameters.selectedClass" (ngModelChange)="updateFilteredReadings()">
                 <mat-option *ngFor="let class of classes" [value]="class">
                     {{ classes }}
                 </mat-option>
@@ -20,7 +20,7 @@
 
         <mat-form-field appearance="fill">
             <mat-label>Professors</mat-label>
-            <mat-select name="selectedProfessor" [(ngModel)]="selectedProfessor"
+            <mat-select name="selectedProfessor" [(ngModel)]="searchParameters.selectedProfessor"
                 (ngModelChange)="updateFilteredReadings()">
                 <mat-option *ngFor="let professor of professors" [value]="professor">
                     {{ professor }}
@@ -28,6 +28,7 @@
             </mat-select>
         </mat-form-field>
 
+        <button mat-button (click)="clearEReaderSearchParameters()">Clear</button>
     </div>
 </form>
 

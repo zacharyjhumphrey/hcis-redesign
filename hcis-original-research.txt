@@ -15,3 +15,12 @@ FOR TESTING:
 PASSWORD ENCRYPTION: 
 - uses MD5 encoding
     exmaple: MD5("testing") => "ae2b1fca515949e5d54fb22b8ed95575"
+
+EREADER: 
+each class has a form data posted with it:
+{
+    tab: 3320,
+    sendTab: 901,
+    secToken: XXX, // TODO: find out what this is
+    referTab: 040
+}

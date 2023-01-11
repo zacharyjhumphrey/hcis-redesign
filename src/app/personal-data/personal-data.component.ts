@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonalData } from 'src/vendor/personal-data';
+import { PersonalData } from 'src/vendor/interfaces';
 
 @Component({
   selector: 'app-personal-data',

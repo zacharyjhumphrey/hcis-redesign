@@ -1,3 +1,4 @@
+// TODO Rename this file to something more industry standard
 export interface PersonalData {
     lastName: string,
     firstName: string,
@@ -31,4 +32,10 @@ export interface OldHCISZIP {
     LastName: string,
     FirstName: string,
     MiddleName: string
+}
+
+export interface EReaderSearchParameters {
+    searchValue: string;
+    selectedProfessor: string;
+    selectedClass: string;
 }
