@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { getAnnouncementsTab, getNavTabs, getReadingsFromAllClasses, getThesesFromResponse } from 'src/vendor/backend-interface';
-import { Thesis } from 'src/common';
+import { getAnnouncementsTab, getNavTabs, parseReadingsFromPage, getThesesFromResponse } from 'src/vendor/backend-interface';
+import { Reading, Thesis } from 'src/common';
 import * as md5 from 'md5';
+import { concatAll, forkJoin, map, mergeAll, Observable } from 'rxjs';
 
 const DEVELOPMENT_SERVER_URL = 'https://f9c95a77-fcb2-4d91-9c04-6012b8d677ea.mock.pstmn.io';
 const PRODUCTION_SERVER_URL = 'https://honors.uca.edu'
@@ -598,11 +599,18 @@ export class BackendServiceService {
     return this.http.get("https://honors.uca.edu/hcis/stu/stuPage666.inc.php?cmd=tabWrite&pageTab=666");
   }
 
-  getAllReadings = () => {
-    // let repsonse = this.http.get("")
-    let response = SENIOR_SEMINAR_PAGE;
-
-    return getReadingsFromAllClasses(response);
+  getAllReadings = (): Observable<Reading[]> => {
+    return forkJoin([
+      this.getEReaderCoreIReadings(),
+      this.getEReaderCoreIIReadings(),
+      this.getEReaderCoreIIIReadings(),
+      this.getEReaderCoreIVReadings(),
+      this.getEReaderJuniorSeminarReadings(),
+      this.getEReaderSeniorSeminarReadings(),
+      this.getEReaderOtherReadings(),
+      this.getEReaderTutorialReadings(),
+      this.getEReaderThesisReadings()
+    ]).pipe(mergeAll());
   }
 
   getThesisWithSearchTerm = (searchText: string, searchConnect: string): Thesis[] => {
@@ -623,31 +631,31 @@ export class BackendServiceService {
   }
 
   // TODO Find a way to send the Cookie header with a request
-  getEReaderTab = (classTabNumber: number = 3320) => {
+  fetchEReaderTabContents = (classTabNumber: number, className: string) => {
     let body = new URLSearchParams();
     body.set('tab', classTabNumber.toString());
     body.set('sendTab', "901");
     body.set('secToken', "1bf5235d32033acf4c0b734bcd1e28e7");
-    body.set('referTab', "040");
-
-    return this.http.post(`https://honors.uca.edu/hcis/stu/stuPage901.inc.php?cmd=contents`, body.toString(), {
+    body.set('referTab', "666");
+    return this.http.post(`${DEVELOPMENT_SERVER_URL}/hcis/stu/stuPage901.inc.php?cmd=contents`, body.toString(), {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Cookie': 'stuSESSION=ljkasdl; SameSite=None'
       },
-      observe: 'response',
+      // observe: 'response',
       responseType: 'text',
       withCredentials: true
-    })
+    }).pipe(
+      map((htmlResponse: string) => parseReadingsFromPage(htmlResponse, className))
+    )
   }
 
-  getEReaderCoreIReadings = () => this.getEReaderTab(1310);
-  getEReaderCoreIIReadings = () => this.getEReaderTab(1320);
-  getEReaderCoreIIIReadings = () => this.getEReaderTab(2310);
-  getEReaderCoreIVReadings = () => this.getEReaderTab(2320);
-  getEReaderJuniorSeminarReadings = () => this.getEReaderTab(3310);
-  getEReaderSeniorSeminarReadings = () => this.getEReaderTab(4310);
-  getEReaderTutorialReadings = () => this.getEReaderTab(3320);
-  getEReaderThesisReadings = () => this.getEReaderTab(4320);
-  getEReaderOtherReadings = () => this.getEReaderTab(5000);
+  getEReaderCoreIReadings = () => this.fetchEReaderTabContents(1310, "Core I");
+  getEReaderCoreIIReadings = () => this.fetchEReaderTabContents(1320, "Core II");
+  getEReaderCoreIIIReadings = () => this.fetchEReaderTabContents(2310, "Core III");
+  getEReaderCoreIVReadings = () => this.fetchEReaderTabContents(2320, "Core IV");
+  getEReaderJuniorSeminarReadings = () => this.fetchEReaderTabContents(3310, "Junior Seminar");
+  getEReaderSeniorSeminarReadings = () => this.fetchEReaderTabContents(4310, "Senior Seminar");
+  getEReaderTutorialReadings = () => this.fetchEReaderTabContents(3320, "Tutorial");
+  getEReaderThesisReadings = () => this.fetchEReaderTabContents(4320, "Thesis");
+  getEReaderOtherReadings = () => this.fetchEReaderTabContents(5000, "Other");
 }

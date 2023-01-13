@@ -56,10 +56,10 @@ const getAnnouncementsItems = ($emSection: JQuery): AnnouncementsItem[] => {
     return toReturn;
 }
 
-export const getReadingsFromAllClasses = (html: string): Reading[] => {
+export const parseReadingsFromPage = (html: string, className: string): Reading[] => {
     const $html = $('<div></div>').html(html);
     const $readContent = $html.find("#readContent > div");
-    return getReadingsFromClass($readContent, "TEST TEST");
+    return getReadingsFromClass($readContent, className);
 }
 
 /**

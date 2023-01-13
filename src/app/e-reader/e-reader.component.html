@@ -13,7 +13,7 @@
             <mat-label>Class</mat-label>
             <mat-select name="selectedClass" [(ngModel)]="searchParameters.selectedClass" (ngModelChange)="updateFilteredReadings()">
                 <mat-option *ngFor="let class of classes" [value]="class">
-                    {{ classes }}
+                    {{ class }}
                 </mat-option>
             </mat-select>
         </mat-form-field>

@@ -18,22 +18,25 @@ const DEFAULT_EREADER_SEARCH_PARAMETERS: EReaderSearchParameters = {
 })
 export class EReaderComponent implements OnInit {
   searchParameters: EReaderSearchParameters = DEFAULT_EREADER_SEARCH_PARAMETERS;
-  allReadings: Reading[];
-  filteredReadings: Reading[];
-  professors: string[];
-  classes: string[];
+  allReadings: Reading[] = [];
+  filteredReadings: Reading[] = [];
+  professors: string[] = [];
+  classes: string[] = [];
 
   constructor(private backendService: BackendServiceService, private localStorageService: LocalStorageService) {
-    this.allReadings = this.backendService.getAllReadings();
-    this.professors = [...new Set(this.allReadings.map(reading => reading.professor).filter(prof => prof != ''))];
-    this.classes = [...new Set(this.allReadings.map(reading => reading.class).filter(className => className != ''))];
-    this.filteredReadings = this.getFilteredReadings();
-
-    this.backendService.getEReaderTab().subscribe(res => {
-      let setCookieHeader = res.headers.get('Set-Cookie');
-
-      console.log(res);
+    this.backendService.getAllReadings().subscribe(readings => {
+      this.allReadings = [...readings, ...this.allReadings];
+      this.professors = [...new Set(this.allReadings.map(reading => reading.professor).filter(prof => prof != ''))];
+      this.classes = [...new Set(this.allReadings.map(reading => reading.class).filter(className => className != ''))];
+      console.log(this.allReadings);
+      this.filteredReadings = this.getFilteredReadings();
     });
+
+    // this.backendService.fetchEReaderTabContents(4310).subscribe(res => {
+    //   let setCookieHeader = res.headers.get('Set-Cookie');
+
+    //   console.log(res);
+    // });
   }
 
   ngOnInit(): void {
