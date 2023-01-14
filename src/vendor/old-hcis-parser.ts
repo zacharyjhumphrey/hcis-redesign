@@ -56,9 +56,10 @@ const getAnnouncementsItems = ($emSection: JQuery): AnnouncementsItem[] => {
     return toReturn;
 }
 
+// TODO: Fix this. The multiple appends are to cover the Other tab edge case
 export const parseReadingsFromPage = (html: string, className: string): Reading[] => {
     const $html = $('<div></div>').html(html);
-    const $readContent = $html.find("#readContent > div");
+    const $readContent = $('<div></div>').html($html.find("#readContent > div").html()).append($html.find("> .RecordListAlt1")).append($html.find("> .RecordListAlt2"));
     return getReadingsFromClass($readContent, className);
 }
 
@@ -82,7 +83,7 @@ const getReadingsFromClass = ($content: JQuery, className: string): Reading[] =>
         if (linkType == LinkType.SCHEDULE) {
             return;
         }
-
+        
         toReturn.push({
             professor: $reading.parent("[id^='collection']").prev().find("dfn:eq(0)").text().trim() ?? "Shared Reading",
             class: className,
