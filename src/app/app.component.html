@@ -2,8 +2,11 @@
 <mat-drawer-container class="example-container">
     <mat-drawer class="side-nav" mode="side" opened>
         <mat-selection-list #shoes [multiple]="false">
-            <mat-list-option *ngFor="let page of pages" [value]="page">
-                <a [routerLink]="page.route" routerLinkActive="active" ariaCurrentWhenActive="page">{{ page.name }}</a>
+            <mat-list-option *ngFor="let page of pages" [value]="page" [routerLink]="page.route">
+                <div class="navigation-page-option" routerLinkActive="active" ariaCurrentWhenActive="page">
+                    <mat-icon [inline]="true">{{ page.icon }}</mat-icon>
+                    <span>{{ page.name }}</span>
+                </div>
             </mat-list-option>
         </mat-selection-list>
     </mat-drawer>

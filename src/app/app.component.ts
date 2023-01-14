@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { getAnnouncementsTab } from 'src/vendor/backend-interface';
 
-interface Page {
+interface NavigationTab {
   name: string,
   route: string
+  icon: string
 }
 
 @Component({
@@ -13,19 +13,23 @@ interface Page {
 })
 export class AppComponent {
   title = 'hcis-redesign';
-  pages: Page[] = [{
+  pages: NavigationTab[] = [{
     name: 'Home Page',
-    route: '/'
+    route: '/',
+    icon: 'alarm'
   }, {
     name: 'eReader',
-    route: '/e-reader'
+    route: '/e-reader',
+    icon: 'book'
   }, {
     name: 'Personal Data',
-    route: '/personal-data'
+    route: '/personal-data',
+    icon: 'person'
   },
   {
     name: 'Thesis Search',
-    route: '/thesis-search'
+    route: '/thesis-search',
+    icon: 'search'
   }];
 // TODO Resize everything with em
   constructor() {

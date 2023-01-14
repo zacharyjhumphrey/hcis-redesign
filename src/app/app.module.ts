@@ -20,6 +20,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ThesisSearchComponent } from './thesis-search/thesis-search.component';
 import { PersonalDataComponent } from './personal-data/personal-data.component';
 import { LoginPopupComponent } from './login-popup/login-popup.component';
+import { MatRippleModule } from '@angular/material/core';
 
 const routes: Routes = [
   { path: 'e-reader', component: EReaderComponent },
@@ -43,6 +44,7 @@ const routes: Routes = [
     BrowserModule,
     MatInputModule,
     FormsModule,
+    MatRippleModule,
     HttpClientModule,
     AppRoutingModule,
     MatSelectModule,
