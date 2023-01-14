@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Thesis } from 'src/common';
-import { BackendServiceService } from '../backend-service.service';
+import { HCISDataService } from '../hcis-data-service';
 
 @Component({
   selector: 'app-thesis-search',
@@ -12,7 +12,7 @@ export class ThesisSearchComponent implements OnInit {
   searchValue: string;
   searchConnectTerm: "AND" | "OR" = "AND";
 
-  constructor(private backendService: BackendServiceService) {
+  constructor(private backendService: HCISDataService) {
     this.fetchedTheses = this.backendService.getThesisWithSearchTerm("", "AND");
     this.searchValue = '';
   }

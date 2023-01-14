@@ -62,32 +62,89 @@ export const parseReadingsFromPage = (html: string, className: string): Reading[
     return getReadingsFromClass($readContent, className);
 }
 
+enum LinkType {
+    SYLLABUS,
+    SCHEDULE,
+    PREFACE,
+    READING
+}
+
 /**
  * TODO class schedule display/digestion
- * TODO syllabus links
  */
-
 const getReadingsFromClass = ($content: JQuery, className: string): Reading[] => {
     let toReturn: Reading[] = [];
     let $readings = $content.find(".RecordListAlt1,.RecordListAlt2");
     $readings.each((i, reading) => {
         let $reading = $(reading);
+        let linkType = getLinkType($reading);
+
+        if (linkType == LinkType.SCHEDULE) {
+            return;
+        }
+
         toReturn.push({
             professor: $reading.parent("[id^='collection']").prev().find("dfn:eq(0)").text().trim() ?? "Shared Reading",
             class: className,
-            title: $reading.clone().children().remove().end().text().trim(),
+            title: getLinkTitle($reading, linkType),
             author: $reading.find("dfn").text().trim(),
-            URL: getReadingOnClickURL($reading)
+            URL: getLinkURL($reading, linkType)
         })
     })
     return toReturn;
 }
 
-const getReadingOnClickURL = (reading: JQuery): string => {
-    // TODO syllabus edge case https://honors.uca.edu/hcis/cabViewer.php?file=syllabi/syl_2779_20221008_115928.pdf&type=application/pdf&drawer=3256&
-    let id = $(reading).attr("onclick")!.split("'")[1].substring(4);
+const getLinkTitle = ($reading: JQuery, type: LinkType): string => {
+    if (type == LinkType.PREFACE) {
+        return $reading.clone().children().text();
+    }
+
+    return $reading.clone().children().remove().end().text().trim();
+}
+
+const getLinkURL = ($reading: JQuery, type: LinkType) => {
+    if (type == LinkType.SYLLABUS) {
+        return getSyllabusOnClickURL($reading);
+    }
+
+    if (type == LinkType.PREFACE) {
+        return getPrefaceOnClickURL($reading);
+    }
+
+    return getReadingOnClickURL($reading);
+}
+
+const getLinkType = ($reading: JQuery): LinkType => {
+    if ($reading.attr("onclick")!.includes("eref=pre")) {
+        return LinkType.PREFACE;
+    }
+
+    if ($reading.attr("onclick")!.includes("readContent")) {
+        return LinkType.SCHEDULE;
+    }
+
+    if ($reading.attr("onclick")!.includes("syllabi")) {
+        return LinkType.SYLLABUS;
+    }
+
+    return LinkType.READING;
+}
+
+const getReadingOnClickURL = ($reading: JQuery): string => {
+    let id = $reading.attr("onclick")!.split("'")[1].substring(4);
     return `https://honors.uca.edu/hcis/stu/stuPage901.inc.php?cmd=print&eref=${id}&sendTab=901`;
 }
+
+const getSyllabusOnClickURL = ($reading: JQuery): string => {
+    let url = $reading.attr("onclick")!.split("'")[3];
+    return `https://honors.uca.edu/hcis/${url}`;
+}
+
+const getPrefaceOnClickURL = ($reading: JQuery): string => {
+    let url = $reading.attr("onclick")!.split("'")[1];
+    return `https://honors.uca.edu/${url}`;
+}
+
 
 /** TODO refactor for readability
  * example: divide by ".emSection"
@@ -108,7 +165,7 @@ const splitElementsByHeadClassName = ($parent: JQuery, header: string): JQuery[]
         headerIndexes.push($parent.find(headerElem).index());
     });
 
-    if ($parent.find(`${header}:eq(0)`).index() != 0) { 
+    if ($parent.find(`${header}:eq(0)`).index() != 0) {
         headerIndexes.unshift(0);
         headerIndexes = headerIndexes.map((value, i) => (i == 0) ? value : value + 1);
     }

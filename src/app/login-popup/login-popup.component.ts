@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BackendServiceService } from '../backend-service.service';
+import { HCISDataService } from '../hcis-data-service';
 
 @Component({
   selector: 'app-login-popup',
@@ -10,7 +10,7 @@ export class LoginPopupComponent implements OnInit {
   usernameValue = '';
   passwordValue = '';
 
-  constructor(private backendService: BackendServiceService) { }
+  constructor(private backendService: HCISDataService) { }
 
   ngOnInit(): void {
   }

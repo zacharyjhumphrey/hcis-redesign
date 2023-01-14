@@ -11,7 +11,6 @@ export class LocalStorageService {
   }
 
   setCachedEReaderSearch = (userSearchParameters: EReaderSearchParameters) => {
-    console.log('storing in local storage');
     localStorage.setItem(this.eReaderSearchKey, JSON.stringify(userSearchParameters))
   }
 

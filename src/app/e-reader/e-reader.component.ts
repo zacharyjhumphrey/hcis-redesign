@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { EReaderSearchParameters } from 'src/vendor/interfaces';
 import { Reading } from '../../common';
-import { BackendServiceService } from '../backend-service.service';
+import { HCISDataService } from '../hcis-data-service';
 import { LocalStorageService } from '../local-storage.service';
 
-// TODO Create clear search button
 const DEFAULT_EREADER_SEARCH_PARAMETERS: EReaderSearchParameters = {
   searchValue: '',
   selectedClass: '',
@@ -23,20 +22,13 @@ export class EReaderComponent implements OnInit {
   professors: string[] = [];
   classes: string[] = [];
 
-  constructor(private backendService: BackendServiceService, private localStorageService: LocalStorageService) {
+  constructor(private backendService: HCISDataService, private localStorageService: LocalStorageService) {
     this.backendService.getAllReadings().subscribe(readings => {
       this.allReadings = [...readings, ...this.allReadings];
       this.professors = [...new Set(this.allReadings.map(reading => reading.professor).filter(prof => prof != ''))];
       this.classes = [...new Set(this.allReadings.map(reading => reading.class).filter(className => className != ''))];
-      console.log(this.allReadings);
       this.filteredReadings = this.getFilteredReadings();
     });
-
-    // this.backendService.fetchEReaderTabContents(4310).subscribe(res => {
-    //   let setCookieHeader = res.headers.get('Set-Cookie');
-
-    //   console.log(res);
-    // });
   }
 
   ngOnInit(): void {
@@ -70,6 +62,6 @@ export class EReaderComponent implements OnInit {
 
   openReading(reading: Reading) {
     console.log(reading);
-    // open(reading.URL);
+    open(reading.URL);
   }
 }

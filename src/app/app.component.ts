@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 interface NavigationTab {
-  name: string,
+  name: string
   route: string
   icon: string
+  selected?: boolean
 }
 
 @Component({
@@ -16,7 +17,8 @@ export class AppComponent {
   pages: NavigationTab[] = [{
     name: 'Home Page',
     route: '/',
-    icon: 'alarm'
+    icon: 'alarm',
+    selected: true
   }, {
     name: 'eReader',
     route: '/e-reader',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AnnouncementsTab } from 'src/common';
-import { BackendServiceService } from '../backend-service.service';
+import { HCISDataService } from '../hcis-data-service';
 
 @Component({
   selector: 'app-announcements',
@@ -10,9 +10,8 @@ import { BackendServiceService } from '../backend-service.service';
 export class AnnouncementsComponent implements OnInit {
   pageData: AnnouncementsTab;
 
-  constructor(private backendService: BackendServiceService) {
+  constructor(private backendService: HCISDataService) {
     this.pageData = this.backendService.getAnnouncementsData();
-    console.log(this.pageData);
   }
 
   ngOnInit(): void {

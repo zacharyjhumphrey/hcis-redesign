@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { getAnnouncementsTab, getNavTabs, parseReadingsFromPage, getThesesFromResponse } from 'src/vendor/backend-interface';
+import { getAnnouncementsTab, getNavTabs, parseReadingsFromPage, getThesesFromResponse } from 'src/vendor/old-hcis-parser';
 import { Reading, Thesis } from 'src/common';
 import * as md5 from 'md5';
 import { concatAll, forkJoin, map, mergeAll, Observable } from 'rxjs';
@@ -573,7 +573,7 @@ const HOME_RESPONSE = `
 @Injectable({
   providedIn: 'root'
 })
-export class BackendServiceService {
+export class HCISDataService {
   BACKEND_URL = DEVELOPMENT_SERVER_URL;
 
   constructor(private http: HttpClient) {
