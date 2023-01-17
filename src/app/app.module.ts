@@ -21,6 +21,7 @@ import { ThesisSearchComponent } from './thesis-search/thesis-search.component';
 import { PersonalDataComponent } from './personal-data/personal-data.component';
 import { LoginPopupComponent } from './login-popup/login-popup.component';
 import { MatRippleModule } from '@angular/material/core';
+import { HcisHeaderComponent } from './hcis-header/hcis-header.component';
 
 const routes: Routes = [
   { path: 'e-reader', component: EReaderComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
     ThesisSearchComponent,
     PersonalDataComponent,
     LoginPopupComponent,
+    HcisHeaderComponent,
   ],
   imports: [
     BrowserModule,

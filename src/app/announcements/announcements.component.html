@@ -10,13 +10,13 @@
             alt="Announcements Panel Accent">
     </div>
 
-    <div>
-        <span>{{ pageData.head }}</span>
-        <span>{{ pageData.date }}</span>
+    <div class="main-content">
+        <div>{{ pageData.head }}</div>
+        <div>{{ pageData.date }}</div>
     
         <div *ngFor="let section of pageData.sections">
-            <h4>{{ section.name }}</h4>
-    
+            <app-hcis-header [title]="section.name"></app-hcis-header>
+
             <ul>
                 <li *ngFor="let item of section.list">
                     <span>{{ item.date }}</span>
