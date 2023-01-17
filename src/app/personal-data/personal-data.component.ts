@@ -1,10 +1,11 @@
+import { ViewEncapsulation } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { PersonalData } from 'src/vendor/interfaces';
 
 @Component({
   selector: 'app-personal-data',
   templateUrl: './personal-data.component.html',
-  styleUrls: ['./personal-data.component.sass']
+  styleUrls: ['./personal-data.component.sass'],
 })
 export class PersonalDataComponent implements OnInit {
   personData: PersonalData = {
