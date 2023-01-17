@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 interface NavigationTab {
   name: string
   route: string
   icon: string
-  selected?: boolean
 }
 
 @Component({
@@ -17,8 +17,7 @@ export class AppComponent {
   pages: NavigationTab[] = [{
     name: 'Home Page',
     route: '/',
-    icon: 'alarm',
-    selected: true
+    icon: 'alarm'
   }, {
     name: 'eReader',
     route: '/e-reader',
@@ -34,7 +33,6 @@ export class AppComponent {
     icon: 'search'
   }];
 // TODO Resize everything with em
-  constructor() {
-    // getAnnouncementsTab()
+  constructor(public router: Router) {
   }
 }
