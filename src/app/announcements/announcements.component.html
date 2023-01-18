@@ -1,27 +1,31 @@
 <div>
-    <div class="announcements-panel">
-        <div id="home-panel-header">
-            <header class="mat-display-2">ANNOUNCMENTS</header>
+    <div class="calendar-panel">
+        <div id="calendar-panel-header">
+            <header class="mat-display-2">CALENDAR</header>
             <div class="underline"></div>
         </div>
     
-        <img id="announcements-panel-logo" src="../../assets/honors-logo.png" alt="Honors Logo">
-        <img id="announcements-panel-accent" src="../../assets/announcements-panel-accent.png"
-            alt="Announcements Panel Accent">
+        <img id="calendar-panel-logo" src="../../assets/honors-logo.png" alt="Honors Logo">
+        <img id="calendar-panel-accent" src="../../assets/announcements-panel-accent.png"
+            alt="Calendar Panel Accent">
     </div>
 
     <div class="main-content">
-        <div>{{ pageData.head }}</div>
+        <!-- <div>{{ pageData.head }}</div> -->
         <div>{{ pageData.date }}</div>
     
-        <div *ngFor="let section of pageData.sections">
-            <app-hcis-header [title]="section.name"></app-hcis-header>
+        <div class="calendar-section" *ngFor="let section of pageData.sections">
+            <app-hcis-header class="section-title" [title]="section.name"></app-hcis-header>
 
             <ul>
-                <li *ngFor="let item of section.list">
-                    <span>{{ item.date }}</span>
-                    <span>{{ item.location }}</span>
-                    <p>{{ item.text }}</p>
+                <li class="announcement-item" *ngFor="let item of section.list">
+                    <div class="name">
+                        <div class="accent"></div>
+                        <span>{{ item.name }}</span>
+                    </div>
+                    <div class="date">{{ item.date }}</div>
+                    <div class="location">{{ item.location }}</div>
+                    <p class="text">{{ item.text }}</p>
                 </li>
             </ul>
         </div>

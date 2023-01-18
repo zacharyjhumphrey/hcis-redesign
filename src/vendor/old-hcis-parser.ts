@@ -46,10 +46,13 @@ const getAnnouncementsItems = ($emSection: JQuery): AnnouncementsItem[] => {
 
     for (let i = 0; i < items.length; i++) {
         let item = items[i];
+        let name = item.find(".emItem").text().trim().split(' - ')[0];
+        let text = item.find(".emItem").text().trim().slice((`${name} - `).length);
         toReturn.push({
             date: item.find(".emDate").text().trim(),
             location: item.find(".emLocation").text().trim(),
-            text: item.find(".emItem").text().trim()
+            text,
+            name
         });
     }
 

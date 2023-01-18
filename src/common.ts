@@ -15,8 +15,9 @@ export interface AnnouncementsSection {
 }
 
 export interface AnnouncementsItem {
-    date: string | null;
-    location: string | null;
+    date?: string;
+    location?: string;
+    name: string;
     text: string;
 }
 

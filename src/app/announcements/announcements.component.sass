@@ -1,40 +1,68 @@
-.announcements-panel
+.calendar-panel
     width: 100%
     height: 366px
     background-color: #097655
     position: relative
     overflow: hidden
 
-
-#home-panel-header
+#calendar-panel-header
     position: absolute
     top: 100px
     left: 100px
 
-#home-panel-header header
+#calendar-panel-header header
     color: white
     font-weight: bold
     margin-bottom: 0px
 
-#home-panel-header .underline
+#calendar-panel-header .underline
     background-color: white
-    width: 200px
+    width: 100px
     height: 8px
     position: relative
     bottom: -13px
-    left: 15px
+    left: 20px
 
-#announcements-panel-accent
+#calendar-panel-accent
     position: absolute
     bottom: -230px
     left: -10px
 
-#announcements-panel-logo
+#calendar-panel-logo
     position: absolute
     top: 35px
     right: 30px
     z-index: 3
 
-.main-content
-    height: 400px
-    padding-top: 90px
+.calendar-section ul
+    list-style: none
+    padding-left: 26px
+
+.calendar-section
+    padding-left: 1.2em
+    margin-bottom: 1.5em
+
+.section-title
+    margin-top: 14px
+    margin-bottom: 12px
+
+.announcement-item > *
+    margin: .4em 0
+
+.announcement-item .name
+    font-size: 2.1em
+    display: flex
+    line-height: 1em
+
+.announcement-item .date
+    font-size: 1.3em
+    font-weight: 500
+
+.announcement-item .name .accent
+    background-color: #016648
+    width: 12px
+    margin-right: 10px
+
+.announcement-item .location
+    opacity: .6
+    font-style: italic

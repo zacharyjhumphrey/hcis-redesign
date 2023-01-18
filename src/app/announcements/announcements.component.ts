@@ -12,6 +12,7 @@ export class AnnouncementsComponent implements OnInit {
 
   constructor(private backendService: HCISDataService) {
     this.pageData = this.backendService.getAnnouncementsData();
+    console.log(this.pageData);
   }
 
   ngOnInit(): void {
