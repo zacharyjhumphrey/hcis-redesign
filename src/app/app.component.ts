@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 interface NavigationTab {
   name: string
   route: string
   icon: string
 }
+
+const MAX_MOBILE_WINDOW_WIDTH = 600;
 
 @Component({
   selector: 'app-root',
@@ -32,7 +35,28 @@ export class AppComponent {
     route: '/thesis-search',
     icon: 'search'
   }];
-// TODO Resize everything with em
-  constructor(public router: Router) {
+  navigationDrawerOpen;
+
+  mobileQuery: MediaQueryList;
+
+  private _mobileQueryListener: () => void;
+
+  constructor(public router: Router, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+    this.navigationDrawerOpen = this.browserIsDesktop();
+    this.mobileQuery = media.matchMedia(`(max-width: ${MAX_MOBILE_WINDOW_WIDTH}px)`);
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
   }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.navigationDrawerOpen = this.browserIsDesktop();
+  }
+
+  browserIsDesktop = () => (window.innerWidth > MAX_MOBILE_WINDOW_WIDTH);
+// TODO Resize everything with em
 }

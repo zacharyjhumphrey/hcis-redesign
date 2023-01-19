@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-hcis-toolbar',
@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hcis-toolbar.component.sass']
 })
 export class HcisToolbarComponent implements OnInit {
+  @Output() toggleNavigationDrawerEvent = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  toggleNavigationDrawer = () => {
+    this.toggleNavigationDrawerEvent.emit()
+  }
 }
