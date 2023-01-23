@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { EReaderSearchParameters } from 'src/vendor/interfaces';
 import { Reading } from '../../common';
 import { HCISDataService } from '../hcis-data-service';
@@ -10,10 +11,11 @@ const DEFAULT_EREADER_SEARCH_PARAMETERS: EReaderSearchParameters = {
   selectedProfessor: ''
 };
 
+const MAX_MOBILE_WINDOW_WIDTH = 600;
 @Component({
   selector: 'app-e-reader',
   templateUrl: './e-reader.component.html',
-  styleUrls: ['./e-reader.component.sass']
+  styleUrls: ['./e-reader.component.sass'],
 })
 export class EReaderComponent implements OnInit {
   searchParameters: EReaderSearchParameters = DEFAULT_EREADER_SEARCH_PARAMETERS;
@@ -21,16 +23,50 @@ export class EReaderComponent implements OnInit {
   filteredReadings: Reading[] = [];
   professors: string[] = [];
   classes: string[] = [];
+  showSearchOptions: boolean;
 
-  constructor(private backendService: HCISDataService, private localStorageService: LocalStorageService) {
-    this.backendService.getAllReadings().subscribe(readings => {
+  mobileQuery: MediaQueryList;
+
+  private _mobileQueryListener: () => void;
+
+  constructor(
+    private backendService: HCISDataService,
+    private localStorageService: LocalStorageService,
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher
+  ) {
+    this.backendService.getAllReadings().subscribe((readings) => {
       this.allReadings = [...readings, ...this.allReadings];
-      this.professors = [...new Set(this.allReadings.map(reading => reading.professor).filter(prof => prof != ''))];
-      this.classes = [...new Set(this.allReadings.map(reading => reading.class).filter(className => className != ''))];
+      this.professors = [
+        ...new Set(
+          this.allReadings
+            .map((reading) => reading.professor)
+            .filter((prof) => prof != '')
+        ),
+      ];
+      this.classes = [
+        ...new Set(
+          this.allReadings
+            .map((reading) => reading.class)
+            .filter((className) => className != '')
+        ),
+      ];
       this.filteredReadings = this.getFilteredReadings();
     });
+
+    this.showSearchOptions = this.browserIsDesktop();
+
+    this.mobileQuery = media.matchMedia(
+      `(max-width: ${MAX_MOBILE_WINDOW_WIDTH}px)`
+    );
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
+  // TODO sticky bottom footer
+  // TODO Format search select options
+  // TODO Check that the readings look good on mobile (font size, spacing, etc.)
+  // TODO Change footer accent position
   ngOnInit(): void {
     let localStorageCache = this.localStorageService.getCachedEReaderSearch();
     if (localStorageCache != null) {
@@ -38,27 +74,58 @@ export class EReaderComponent implements OnInit {
     }
   }
 
-  updateFilteredReadings = (): void => {
-    this.filteredReadings = this.getFilteredReadings();
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.showSearchOptions = this.browserIsDesktop();
+  }
+
+  clearSearchValue = () => {
+    this.searchParameters.searchValue = '';
     this.localStorageService.setCachedEReaderSearch(this.searchParameters);
   }
 
-  clearEReaderSearchParameters() {
-    this.searchParameters = {...DEFAULT_EREADER_SEARCH_PARAMETERS};
+  browserIsDesktop = () => window.innerWidth > MAX_MOBILE_WINDOW_WIDTH;
+
+  toggleSearchOptions = () => this.showSearchOptions = !this.showSearchOptions;
+
+  searchValueChanged = () => {
     this.updateFilteredReadings();
+    if (!this.browserIsDesktop()) {
+      this.showSearchOptions = false;
+    }
   }
 
+  updateFilteredReadings = (): void => {
+    this.filteredReadings = this.getFilteredReadings();
+    this.localStorageService.setCachedEReaderSearch(this.searchParameters);
+  };
+
   getFilteredReadings = (): Reading[] => {
-    return this.allReadings.filter(
-      (reading) =>
-        this.searchParameters.selectedProfessor == '' || reading.professor == this.searchParameters.selectedProfessor
-    ).filter(
-      (reading) =>
-        this.searchParameters.selectedClass == '' || reading.class == this.searchParameters.selectedClass
-    ).filter(
-      (reading) => new RegExp(this.searchParameters.searchValue, "i").test(reading.title) || new RegExp(this.searchParameters.searchValue, "i").test(reading.author)
-    )
-  }
+    return this.allReadings
+      .filter(
+        (reading) =>
+          this.searchParameters.selectedProfessor == '' ||
+          reading.professor == this.searchParameters.selectedProfessor
+      )
+      .filter(
+        (reading) =>
+          this.searchParameters.selectedClass == '' ||
+          reading.class == this.searchParameters.selectedClass
+      )
+      .filter(
+        (reading) =>
+          new RegExp(this.searchParameters.searchValue, 'i').test(
+            reading.title
+          ) ||
+          new RegExp(this.searchParameters.searchValue, 'i').test(
+            reading.author
+          )
+      );
+  };
 
   openReading(reading: Reading) {
     console.log(reading);

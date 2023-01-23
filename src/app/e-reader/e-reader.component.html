@@ -1,46 +1,91 @@
-<form>
+<div id="e-reader">
+  <form>
     <mat-form-field id="search-value" appearance="fill">
-        <mat-label>Search Readings...</mat-label>
-        <input matInput type="text" name="searchValue" [(ngModel)]="searchParameters.searchValue"
-            (ngModelChange)="updateFilteredReadings()">
-        <button *ngIf="searchParameters.searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchParameters.searchValue=''">
-            <mat-icon>close</mat-icon>
-        </button>
+      <mat-label>Search Readings...</mat-label>
+      <input
+        matInput
+        type="text"
+        name="searchValue"
+        [(ngModel)]="searchParameters.searchValue"
+        (ngModelChange)="searchValueChanged()"
+      />
+      <button
+        *ngIf="searchParameters.searchValue"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clearSearchValue()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
     </mat-form-field>
 
     <div id="search-select-row">
+      <!-- <mat-button class="toggle-search-options">
+        <span>Options</span>
+        <mat-icon>arrow_drop_down</mat-icon>
+      </mat-button> -->
+      <!-- TODO Add clear button to reading title search value -->
+      <!-- TODO Create a drawer that hides/shows the professor and class select boxes -->
+      <!-- TODO Make it possible to toggle these off by selecting them again -->
+      <div class="search-options" *ngIf="showSearchOptions">
         <mat-form-field appearance="fill">
-            <mat-label>Class</mat-label>
-            <mat-select name="selectedClass" [(ngModel)]="searchParameters.selectedClass" (ngModelChange)="updateFilteredReadings()">
-                <mat-option *ngFor="let class of classes" [value]="class">
-                    {{ class }}
-                </mat-option>
-            </mat-select>
+          <mat-label>Class</mat-label>
+          <mat-select
+            name="selectedClass"
+            [(ngModel)]="searchParameters.selectedClass"
+            (ngModelChange)="updateFilteredReadings()"
+          >
+            <mat-option>Any</mat-option>
+            <mat-option *ngFor="let class of classes" [value]="class">
+              {{ class }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>Professors</mat-label>
-            <mat-select name="selectedProfessor" [(ngModel)]="searchParameters.selectedProfessor"
-                (ngModelChange)="updateFilteredReadings()">
-                <mat-option *ngFor="let professor of professors" [value]="professor">
-                    {{ professor }}
-                </mat-option>
-            </mat-select>
+          <mat-label>Professors</mat-label>
+          <mat-select
+            name="selectedProfessor"
+            [(ngModel)]="searchParameters.selectedProfessor"
+            (ngModelChange)="updateFilteredReadings()"
+          >
+            <mat-option>Any</mat-option>
+            <mat-option
+              *ngFor="let professor of professors"
+              [value]="professor"
+            >
+              {{ professor }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
-
-        <button mat-button (click)="clearEReaderSearchParameters()">Clear</button>
+      </div>
     </div>
-</form>
+  </form>
 
-<mat-list role="list">
-    <mat-list-item *ngFor="let reading of filteredReadings" role="listitem" (click)="openReading(reading)"
-        class="class-reading">
+  <div class="reading-results">
+    <div class="results-header">
+      <span>Results</span>
+      <button *ngIf="!browserIsDesktop()" (click)="toggleSearchOptions()" mat-button id="toggle-search-options">
+        Options <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+    <mat-list class="reading-results-list" role="list">
+      <mat-list-item
+        *ngFor="let reading of filteredReadings"
+        role="listitem"
+        (click)="openReading(reading)"
+        class="class-reading"
+      >
         <mat-icon mat-list-icon>folder</mat-icon>
-        <!-- <mat-icon mat-list-icon>hearing</mat-icon> -->
+        <!-- TODO audio version from google drive <mat-icon mat-list-icon>hearing</mat-icon> -->
         <p mat-line>{{ reading.title }}</p>
-        <p mat-line> {{ reading.author }} </p>
-        <p mat-line> {{ reading.professor }} </p>
-        <p mat-line> {{ reading.class }} </p>
+        <p mat-line>{{ reading.author }}</p>
+        <p mat-line>{{ reading.professor }}</p>
+        <p mat-line>{{ reading.class }}</p>
         <mat-divider></mat-divider>
-    </mat-list-item>
-</mat-list>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

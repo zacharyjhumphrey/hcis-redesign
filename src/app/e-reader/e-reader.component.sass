@@ -1,13 +1,30 @@
 .class-reading
     cursor: pointer
 
+#e-reader
+    margin: 10px
+
 #search-value
     display: block
-    margin: 10px
+
+.results-header
+  display: flex
+  justify-content: space-between
+  align-items: center
 
 #search-select-row
     display: flex
     justify-content: center
+    margin-left: 14px
+    margin-right: 14px
 
 #search-select-row mat-form-field
     padding: 5px
+
+$breakpoint-tablet: 600px
+@media (max-width: $breakpoint-tablet)
+  #search-select-row
+    flex-direction: column
+
+  #search-select-row > *
+    flex: 1
