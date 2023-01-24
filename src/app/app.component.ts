@@ -72,4 +72,11 @@ export class AppComponent {
 
   browserIsDesktop = () => window.innerWidth > MAX_MOBILE_WINDOW_WIDTH;
   // TODO Resize everything with em
+
+  // TODO if mobile user goes to new page, close page navigation drawer
+  // selectPageNavigation = (page: any) => {
+  //   if (!this.browserIsDesktop()) {
+
+  //   }
+  // }
 }

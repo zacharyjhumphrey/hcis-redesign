@@ -1,5 +1,10 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  OnInit,
+} from '@angular/core';
 import { EReaderSearchParameters } from 'src/vendor/interfaces';
 import { Reading } from '../../common';
 import { HCISDataService } from '../hcis-data-service';
@@ -8,7 +13,7 @@ import { LocalStorageService } from '../local-storage.service';
 const DEFAULT_EREADER_SEARCH_PARAMETERS: EReaderSearchParameters = {
   searchValue: '',
   selectedClass: '',
-  selectedProfessor: ''
+  selectedProfessor: '',
 };
 
 const MAX_MOBILE_WINDOW_WIDTH = 600;
@@ -63,10 +68,7 @@ export class EReaderComponent implements OnInit {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
-  // TODO sticky bottom footer
-  // TODO Format search select options
-  // TODO Check that the readings look good on mobile (font size, spacing, etc.)
-  // TODO Change footer accent position
+  // TODO Sticky header on mobile
   ngOnInit(): void {
     let localStorageCache = this.localStorageService.getCachedEReaderSearch();
     if (localStorageCache != null) {
@@ -85,19 +87,20 @@ export class EReaderComponent implements OnInit {
 
   clearSearchValue = () => {
     this.searchParameters.searchValue = '';
-    this.localStorageService.setCachedEReaderSearch(this.searchParameters);
-  }
+    this.updateFilteredReadings();
+  };
 
   browserIsDesktop = () => window.innerWidth > MAX_MOBILE_WINDOW_WIDTH;
 
-  toggleSearchOptions = () => this.showSearchOptions = !this.showSearchOptions;
+  toggleSearchOptions = () =>
+    (this.showSearchOptions = !this.showSearchOptions);
 
   searchValueChanged = () => {
     this.updateFilteredReadings();
     if (!this.browserIsDesktop()) {
       this.showSearchOptions = false;
     }
-  }
+  };
 
   updateFilteredReadings = (): void => {
     this.filteredReadings = this.getFilteredReadings();
@@ -105,19 +108,24 @@ export class EReaderComponent implements OnInit {
   };
 
   getFilteredReadings = (): Reading[] => {
+    console.dir(this.searchParameters);
     return this.allReadings
       .filter(
         (reading) =>
           this.searchParameters.selectedProfessor == '' ||
+          this.searchParameters.selectedProfessor == undefined ||
           reading.professor == this.searchParameters.selectedProfessor
       )
       .filter(
         (reading) =>
           this.searchParameters.selectedClass == '' ||
+          this.searchParameters.selectedClass == undefined ||
           reading.class == this.searchParameters.selectedClass
       )
       .filter(
         (reading) =>
+          this.searchParameters.searchValue == '' ||
+          this.searchParameters.searchValue == undefined ||
           new RegExp(this.searchParameters.searchValue, 'i').test(
             reading.title
           ) ||
@@ -126,6 +134,10 @@ export class EReaderComponent implements OnInit {
           )
       );
   };
+
+  additionalOptionsAreEmpty = () =>
+    this.searchParameters.selectedClass == undefined &&
+    this.searchParameters.selectedProfessor == undefined;
 
   openReading(reading: Reading) {
     console.log(reading);

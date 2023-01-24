@@ -66,8 +66,8 @@
   <div class="reading-results">
     <div class="results-header">
       <span>Results</span>
-      <button *ngIf="!browserIsDesktop()" (click)="toggleSearchOptions()" mat-button id="toggle-search-options">
-        Options <mat-icon>arrow_drop_down</mat-icon>
+      <button *ngIf="!browserIsDesktop()" (click)="toggleSearchOptions()" [ngStyle]="{ 'color': (additionalOptionsAreEmpty()) ? null : 'green' }" mat-button id="toggle-search-options">
+        Options <mat-icon [inline]="true">{{ (showSearchOptions) ? "arrow_drop_up" : "arrow_drop_down" }}</mat-icon>
       </button>
     </div>
     <mat-divider></mat-divider>
