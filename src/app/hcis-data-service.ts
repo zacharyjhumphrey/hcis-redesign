@@ -306,10 +306,6 @@ in Aquatic Ecosystems to the Community of Conway, AR<dfn><i>Kate Shute</i></dfn>
 <div class="newline"></div>
 </div>
 `
-
-// POST: https://honors.uca.edu/hcis/stu/stuPage901.inc.php?cmd=contents
-// form data: tab: 1320, sendTab: 901, referTab: 040
-// TODO Need to fix the thesis page links
 const SENIOR_SEMINAR_PAGE = `<div id="navBarWrap">
 <div id="navBar">
 <div id="t_1310" class="navTab" onclick="ajaxSend('t_1310','/hcis/stu/stuPage901.inc.php?cmd=contents','formData');">
@@ -2057,7 +2053,6 @@ export class HCISDataService {
     return getAnnouncementsTab(response);
   }
 
-  // TODO Find a way to send the Cookie header with a request
   fetchEReaderTabContents = (classTabNumber: number, className: string) => {
     let body = new URLSearchParams();
     body.set('tab', classTabNumber.toString());

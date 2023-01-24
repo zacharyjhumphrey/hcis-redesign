@@ -45,7 +45,6 @@ export class AppComponent {
 
   private _mobileQueryListener: () => void;
 
-  // TODO Make the footer stick to the bottom if the contents of a page is too small
   // TODO Hamburger menu isn't centered
   // TODO (Maybe?) Create a service for window size, etc.
   constructor(
