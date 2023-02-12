@@ -8,6 +8,5 @@
     </div>
 
     <div class="underline-accent"> </div>
-    <!-- <img class="header-underline-accent-image" src="../../assets/header-title-underline-accent.svg" alt=""> -->
-    <img class="header-underline-accent-image" src="../../assets/header-title-underline-accent-mobile.svg" alt="">
+    <img class="header-underline-accent-image" [src]="browserIsDesktop() ? '../../assets/header-title-underline-accent.svg' : '../../assets/header-title-underline-accent-mobile.svg'"  alt="">
 </div>
