@@ -8,7 +8,7 @@ interface NavigationTab {
   icon: string;
 }
 
-const MAX_MOBILE_WINDOW_WIDTH = 600;
+const MAX_MOBILE_WINDOW_WIDTH = 800;
 
 @Component({
   selector: 'app-root',
@@ -28,16 +28,16 @@ export class AppComponent {
       route: '/e-reader',
       icon: 'book',
     },
-    {
-      name: 'Personal Data',
-      route: '/personal-data',
-      icon: 'person',
-    },
-    {
-      name: 'Thesis Search',
-      route: '/thesis-search',
-      icon: 'search',
-    },
+    // {
+    //   name: 'Personal Data',
+    //   route: '/personal-data',
+    //   icon: 'person',
+    // },
+    // {
+    //   name: 'Thesis Search',
+    //   route: '/thesis-search',
+    //   icon: 'search',
+    // },
   ];
   navigationDrawerOpen: boolean;
 

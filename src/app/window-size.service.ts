@@ -1,7 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, HostListener, Injectable } from '@angular/core';
 
-const MAX_MOBILE_WINDOW_WIDTH = 600;
+const MAX_MOBILE_WINDOW_WIDTH = 800;
 
 @Injectable({
   providedIn: 'root'
