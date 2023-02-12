@@ -1,7 +1,16 @@
 <mat-toolbar class="app-header" color="primary">
-    <button mat-icon-button (click)="toggleNavigationDrawer()" class="menu-button" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <span class="display-1">HCIS</span>
-    <img class="header-accent" src="../../assets/header-accent.png" alt="Header Accent">
+  <button
+    mat-icon-button
+    (click)="toggleNavigationDrawer()"
+    class="menu-button"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon [inline]="true">menu</mat-icon>
+  </button>
+  <span class="display-1">HCIS</span>
+  <img
+    class="header-accent"
+    src="../../assets/header-accent.png"
+    alt="Header Accent"
+  />
 </mat-toolbar>

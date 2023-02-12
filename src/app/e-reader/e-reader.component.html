@@ -58,7 +58,9 @@
 
   <div class="reading-results">
     <div class="results-header">
+      <!-- TODO Add padding-y to results span -->
       <span>Results</span>
+      <!-- TODO Make button padding look better -->
       <button *ngIf="!browserIsDesktop()" (click)="toggleSearchOptions()" [ngStyle]="{ 'color': (additionalOptionsAreEmpty()) ? null : 'green' }" mat-button id="toggle-search-options">
         Options <mat-icon [inline]="true">{{ (showSearchOptions) ? "arrow_drop_up" : "arrow_drop_down" }}</mat-icon>
       </button>
