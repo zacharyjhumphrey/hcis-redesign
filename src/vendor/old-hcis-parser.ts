@@ -86,7 +86,7 @@ const getReadingsFromClass = ($content: JQuery, className: string): Reading[] =>
         if (linkType == LinkType.SCHEDULE) {
             return;
         }
-        
+
         toReturn.push({
             professor: $reading.parent("[id^='collection']").prev().find("dfn:eq(0)").text().trim() ?? "Shared Reading",
             class: className,
@@ -157,8 +157,8 @@ const getPrefaceOnClickURL = ($reading: JQuery): string => {
  * <div class=".emLocation"> </div>
  * <div class=".emSection"> </div>
  * <div class=".emItem"> </div>
- * 
- * results in 
+ *
+ * results in
  * [[.emSection, .emItem, .emLocation], [.emSection, .emItem]]
  */
 const splitElementsByHeadClassName = ($parent: JQuery, header: string): JQuery[] => {
@@ -206,4 +206,10 @@ export const getThesesFromResponse = (response: string): Thesis[] => {
         })
     })
     return toReturn;
+}
+
+export const wasLoginSuccess = (body: string) => {
+  let $tempParent = $("<div></div>");
+  $tempParent.append(body);
+  return $tempParent.find('.sysInfo').length > 0;
 }

@@ -40,18 +40,18 @@ export class AppComponent {
     // },
   ];
   navigationDrawerOpen: boolean;
-
+  loggedIn: boolean;
   mobileQuery: MediaQueryList;
 
   private _mobileQueryListener: () => void;
 
-  // TODO Hamburger menu isn't centered
   // TODO (Maybe?) Create a service for window size, etc.
   constructor(
     public router: Router,
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher
   ) {
+    this.loggedIn = false;
     this.navigationDrawerOpen = this.browserIsDesktop();
     this.mobileQuery = media.matchMedia(
       `(max-width: ${MAX_MOBILE_WINDOW_WIDTH}px)`
@@ -71,6 +71,14 @@ export class AppComponent {
 
   browserIsDesktop = () => window.innerWidth > MAX_MOBILE_WINDOW_WIDTH;
   // TODO Resize everything with em
+
+  pageLinkClicked = () => {
+    if (!this.browserIsDesktop()) {
+      this.navigationDrawerOpen = false;
+    }
+  }
+
+  userLoggedIn = () => this.loggedIn = true;
 
   // TODO if mobile user goes to new page, close page navigation drawer
   // selectPageNavigation = (page: any) => {

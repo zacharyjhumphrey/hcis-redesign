@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { getAnnouncementsTab, getNavTabs, parseReadingsFromPage, getThesesFromResponse } from 'src/vendor/old-hcis-parser';
+import { getAnnouncementsTab, getNavTabs, parseReadingsFromPage, getThesesFromResponse, wasLoginSuccess } from 'src/vendor/old-hcis-parser';
 import { Reading, Thesis } from 'src/common';
 import * as md5 from 'md5';
 import { concatAll, forkJoin, map, mergeAll, Observable } from 'rxjs';
@@ -2013,9 +2013,10 @@ export class HCISDataService {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      observe: 'response',
       responseType: 'text'
-    })
+    }).pipe(
+      map((htmlResponse: string) => wasLoginSuccess(htmlResponse))
+    )
   }
 
   getCrazyQuotes = () => {

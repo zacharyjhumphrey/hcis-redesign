@@ -22,12 +22,15 @@ import { PersonalDataComponent } from './personal-data/personal-data.component';
 import { LoginPopupComponent } from './login-popup/login-popup.component';
 import { MatRippleModule } from '@angular/material/core';
 import { HcisHeaderComponent } from './hcis-header/hcis-header.component';
+import { LoginComponent } from './login/login.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const routes: Routes = [
   { path: 'e-reader', component: EReaderComponent },
   { path: '', component: AnnouncementsComponent },
   { path: 'personal-data', component: PersonalDataComponent },
-  { path: 'thesis-search', component: ThesisSearchComponent }
+  { path: 'thesis-search', component: ThesisSearchComponent },
 ];
 
 @NgModule({
@@ -41,9 +44,12 @@ const routes: Routes = [
     PersonalDataComponent,
     LoginPopupComponent,
     HcisHeaderComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
+    MatCardModule,
+    MatProgressBarModule,
     MatInputModule,
     FormsModule,
     MatRippleModule,
@@ -56,7 +62,7 @@ const routes: Routes = [
     MatIconModule,
     MatListModule,
     MatSidenavModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
   ],
   exports: [RouterModule],
   providers: [],
