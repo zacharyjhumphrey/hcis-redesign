@@ -108,7 +108,7 @@ export class EReaderComponent implements OnInit {
   };
 
   getFilteredReadings = (): Reading[] => {
-    console.dir(this.searchParameters);
+    // console.dir(this.searchParameters);
     return this.allReadings
       .filter(
         (reading) =>

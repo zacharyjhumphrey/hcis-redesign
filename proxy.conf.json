@@ -1,0 +1,7 @@
+{
+    "/": {
+        "target": "https://honors.uca.edu/",
+        "secure": true,
+        "changeOrigin": true
+    }
+}

@@ -2009,11 +2009,12 @@ export class HCISDataService {
     body.set('uname', username);
     body.set('pwaenc', md5(password));
 
-    return this.http.post("https://honors.uca.edu/hcis/stu/stuPage101.inc.php", body.toString(), {
+    return this.http.post("/hcis/stu/stuPage101.inc.php", body.toString(), {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      responseType: 'text'
+      responseType: 'text',
+      withCredentials: true
     }).pipe(
       map((htmlResponse: string) => wasLoginSuccess(htmlResponse))
     )
@@ -2048,10 +2049,21 @@ export class HCISDataService {
   }
 
   getAnnouncementsData = () => {
-    // let response = this.http.post()
-    let response = HOME_RESPONSE;
-
-    return getAnnouncementsTab(response);
+    let body = new URLSearchParams();
+    body.set('secToken', "1bf5235d32033acf4c0b734bcd1e28e7");
+    body.set('cmd', "page");
+    body.set('sendTab', "040");
+    body.set('pageTab', "040");
+    body.set('defTab', "-1");
+    return this.http.post(`/hcis/stu/stuPage040.inc.php`, body.toString(), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      responseType: 'text',
+      withCredentials: true
+    }).pipe(
+      map((htmlResponse: string) => getAnnouncementsTab(htmlResponse))
+    )
   }
 
   fetchEReaderTabContents = (classTabNumber: number, className: string) => {
@@ -2060,9 +2072,9 @@ export class HCISDataService {
     body.set('sendTab', "901");
     body.set('secToken', "1bf5235d32033acf4c0b734bcd1e28e7");
     body.set('referTab', "666");
-    return this.http.post(`${DEVELOPMENT_SERVER_URL}/hcis/stu/stuPage901.inc.php?cmd=contents`, body.toString(), {
+    return this.http.post(`/hcis/stu/stuPage901.inc.php?cmd=contents`, body.toString(), {
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
       responseType: 'text',
       withCredentials: true
@@ -2071,40 +2083,13 @@ export class HCISDataService {
     )
   }
 
-  getEReaderCoreIReadings = (): Observable<Reading[]> => new Observable((observable) => {
-    observable.next(parseReadingsFromPage(CORE_I_PAGE, "Core I"));
-    observable.complete();
-  }); // this.fetchEReaderTabContents(1310, "Core I");
-  getEReaderCoreIIReadings = (): Observable<Reading[]> => new Observable((observable) => {
-    observable.next(parseReadingsFromPage(CORE_II_PAGE, "Core II"));
-    observable.complete();
-   }); // this.fetchEReaderTabContents(1320, "Core II");
-  getEReaderCoreIIIReadings = (): Observable<Reading[]> => new Observable((observable) => {
-    observable.next(parseReadingsFromPage(CORE_III_PAGE, "Core III"));
-    observable.complete();
-   }); // this.fetchEReaderTabContents(2310, "Core III");
-  getEReaderCoreIVReadings = (): Observable<Reading[]> => new Observable((observable) => {
-    observable.next(parseReadingsFromPage(CORE_IV_PAGE, "Core IV"));
-    observable.complete();
-   }); // this.fetchEReaderTabContents(2320, "Core IV");
-  getEReaderJuniorSeminarReadings = (): Observable<Reading[]> => new Observable((observable) => {
-    observable.next(parseReadingsFromPage(JUNIOR_SEMINAR_PAGE, "Junior Seminar"));
-    observable.complete();
-   }); // this.fetchEReaderTabContents(3310, "Junior Seminar");
-  getEReaderSeniorSeminarReadings = (): Observable<Reading[]> => new Observable((observable) => {
-    observable.next(parseReadingsFromPage(SENIOR_SEMINAR_PAGE, "Senior Seminar"));
-    observable.complete();
-   }); // this.fetchEReaderTabContents(4310, "Senior Seminar");
-  getEReaderTutorialReadings = (): Observable<Reading[]> => new Observable((observable) => {
-    observable.next(parseReadingsFromPage(TUTORIAL_PAGE, "Tutorial"));
-    observable.complete();
-   }); // this.fetchEReaderTabContents(3320, "Tutorial");
-  getEReaderThesisReadings = (): Observable<Reading[]> => new Observable((observable) => {
-    observable.next(parseReadingsFromPage(THESIS_PAGE, "Thesis"));
-    observable.complete();
-   }); // this.fetchEReaderTabContents(4320, "Thesis");
-  getEReaderOtherReadings = (): Observable<Reading[]> => new Observable((observable) => {
-    observable.next(parseReadingsFromPage(OTHER_PAGE, "Other"));
-    observable.complete();
-   }); // this.fetchEReaderTabContents(5000, "Other");
+  getEReaderCoreIReadings = (): Observable<Reading[]> => this.fetchEReaderTabContents(1310, "Core I");
+  getEReaderCoreIIReadings = (): Observable<Reading[]> => this.fetchEReaderTabContents(1320, "Core II");
+  getEReaderCoreIIIReadings = (): Observable<Reading[]> => this.fetchEReaderTabContents(2310, "Core III");
+  getEReaderCoreIVReadings = (): Observable<Reading[]> => this.fetchEReaderTabContents(2320, "Core IV");
+  getEReaderJuniorSeminarReadings = (): Observable<Reading[]> => this.fetchEReaderTabContents(3310, "Junior Seminar");
+  getEReaderSeniorSeminarReadings = (): Observable<Reading[]> => this.fetchEReaderTabContents(4310, "Senior Seminar");
+  getEReaderTutorialReadings = (): Observable<Reading[]> => this.fetchEReaderTabContents(3320, "Tutorial");
+  getEReaderThesisReadings = (): Observable<Reading[]> => this.fetchEReaderTabContents(4320, "Thesis");
+  getEReaderOtherReadings = (): Observable<Reading[]> => this.fetchEReaderTabContents(5000, "Other");
 }

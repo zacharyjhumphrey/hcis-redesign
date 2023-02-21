@@ -8,11 +8,12 @@ import { HCISDataService } from '../hcis-data-service';
   styleUrls: ['./announcements.component.sass']
 })
 export class AnnouncementsComponent implements OnInit {
-  pageData: AnnouncementsTab;
+  pageData: AnnouncementsTab | null = null;
 
   constructor(private backendService: HCISDataService) {
-    this.pageData = this.backendService.getAnnouncementsData();
-    console.log(this.pageData);
+    this.backendService.getAnnouncementsData().subscribe((data) => {
+      this.pageData = data
+    });
   }
 
   ngOnInit(): void {
