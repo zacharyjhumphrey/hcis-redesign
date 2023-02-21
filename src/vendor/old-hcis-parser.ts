@@ -1,5 +1,6 @@
 import * as $ from "jquery";
 import { AnnouncementsItem, AnnouncementsSection, AnnouncementsTab, Reading, Thesis } from '../common';
+import { LoginData } from "./interfaces";
 
 // TODO Add type : NavigationTabs[]
 export const getNavTabs = (html: string) => {
@@ -208,8 +209,10 @@ export const getThesesFromResponse = (response: string): Thesis[] => {
     return toReturn;
 }
 
-export const wasLoginSuccess = (body: string) => {
-  let $tempParent = $("<div></div>");
-  $tempParent.append(body);
-  return $tempParent.find('.sysInfo').length > 0;
+export const wasLoginSuccess = (body: string): LoginData => {
+    let $tempParent = $("<div></div>");
+    $tempParent.append(body);
+    return {
+        success: $tempParent.find('.sysInfo').length > 0
+    };
 }

@@ -27,6 +27,12 @@ export interface PersonalData {
     permanentAddressCellPhone: string
 }
 
+export interface LoginData {
+    success: boolean;
+    failedAttempts ?: number;
+}
+
+
 // TODO Create an interface for what HCIS expects in the backend. middleware interface
 export interface OldHCISZIP {
     LastName: string,

@@ -1,9 +1,9 @@
-<div *ngIf="pageData != null">
+<div>
   <div class="calendar-panel">
     <div id="calendar-panel-header">
       <header class="mat-display-2">CALENDAR</header>
       <div class="underline"></div>
-      <div id="calendar-date">{{ pageData.date }}</div>
+      <div id="calendar-date" *ngIf="pageData != null">{{ pageData.date }}</div>
     </div>
 
     <img
@@ -29,7 +29,7 @@
     />
   </div>
 
-  <div class="main-content">
+  <div class="main-content" *ngIf="pageData != null">
     <div class="calendar-section" *ngFor="let section of pageData.sections">
       <app-hcis-header
         class="section-title"

@@ -2048,6 +2048,18 @@ export class HCISDataService {
     return getThesesFromResponse(response);
   }
 
+  // TODO Figure out if secToken is unique to me
+  // TODO Make the prod build find assets on the same directory level
+  // TODO Add login attempts to login component
+  // TODO Find a way to make announcmenets more readable. text is too "together"
+  // TODO Make login component look better on mobile
+  // TODO Make login button aligned better
+  // TODO Find all emails and links in announcements and wrap them in anchor tags
+  // TODO Find a way to fix being on e-reader and the 404 being a repsonse
+  // TODO Possibly make the proxy unique to dev build
+  // TODO Add spinner to loading components for home and e-reader pages
+  // TODO Faculty hours page?
+
   getAnnouncementsData = () => {
     let body = new URLSearchParams();
     body.set('secToken', "1bf5235d32033acf4c0b734bcd1e28e7");
