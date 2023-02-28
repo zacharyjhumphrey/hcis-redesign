@@ -45,7 +45,7 @@ export class AppComponent {
 
   private _mobileQueryListener: () => void;
 
-  // TODO (Maybe?) Create a service for window size, etc.
+  // TODO Create a service for window size, etc.
   constructor(
     public router: Router,
     changeDetectorRef: ChangeDetectorRef,
@@ -79,11 +79,4 @@ export class AppComponent {
   }
 
   userLoggedIn = () => this.loggedIn = true;
-
-  // TODO if mobile user goes to new page, close page navigation drawer
-  // selectPageNavigation = (page: any) => {
-  //   if (!this.browserIsDesktop()) {
-
-  //   }
-  // }
 }

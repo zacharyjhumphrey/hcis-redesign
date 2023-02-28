@@ -1,7 +1,21 @@
-.example-card
+.example-card, mat-card-actions
   max-width: 400px
+
+mat-card-actions
+  padding-top: 0 !important
+  margin: 0 !important
+
+.attempts
+  color: red
+
+.mat-card-header-text
+  margin: 6px 0px 6px 2px !important
 
 $breakpoint-tablet: 600px
 @media (max-width: $breakpoint-tablet)
   .example-card
     width: 80%
+
+  .login-h
+    display: flex
+    justify-content: center

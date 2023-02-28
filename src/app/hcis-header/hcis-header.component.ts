@@ -15,8 +15,7 @@ export class HcisHeaderComponent implements OnInit {
 
   private _mobileQueryListener: () => void;
 
-  // TODO Hamburger menu isn't centered
-  // TODO (Maybe?) Create a service for window size, etc.
+  // TODO Create a service for window size, etc.
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher

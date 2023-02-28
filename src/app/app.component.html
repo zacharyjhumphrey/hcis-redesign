@@ -1,5 +1,5 @@
 <div id="hcis-app" [ngClass]="{ 'login-page': !loggedIn }">
-  <div *ngIf="!loggedIn">
+  <div class="login-h" *ngIf="!loggedIn">
     <app-login (loggedInSuccess)="userLoggedIn()"></app-login>
   </div>
   <div *ngIf="loggedIn">

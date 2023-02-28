@@ -212,7 +212,19 @@ export const getThesesFromResponse = (response: string): Thesis[] => {
 export const wasLoginSuccess = (body: string): LoginData => {
     let $tempParent = $("<div></div>");
     $tempParent.append(body);
+    let failedAttempts = 0;
+    if ($tempParent.find('.sysWarning').length > 0) {
+        console.log($tempParent.find('.sysWarning').html())
+        failedAttempts = parseInt($tempParent.find('.sysWarning').html().match(/[0-9]+/)!![0]);
+    }
     return {
-        success: $tempParent.find('.sysInfo').length > 0
+        success: $tempParent.find('.sysInfo').length > 0,
+        failedAttempts
     };
+}
+
+export const getSECToken = (body: string) => {
+    let $tempParent = $("<div></div>");
+    $tempParent.append(body);
+    return $tempParent.find(`input[name="secToken"]`).attr('value')
 }
