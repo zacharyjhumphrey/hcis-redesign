@@ -40,7 +40,7 @@ export class HCISDataService {
   }
 
   getCrazyQuotes = () => {
-    return this.http.get("https://honors.uca.edu/hcis/stu/stuPage666.inc.php?cmd=tabWrite&pageTab=666");
+    return this.http.get("/hcis/stu/stuPage666.inc.php?cmd=tabWrite&pageTab=666");
   }
 
   getAllReadings = (): Observable<Reading[]> => {

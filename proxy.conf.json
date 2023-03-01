@@ -1,7 +1,14 @@
 {
-    "/": {
-        "target": "https://honors.uca.edu/",
-        "secure": true,
+    "/hcis": {
+        "target": "https://honors.uca.edu",
+        "secure": false,
         "changeOrigin": true
+    },
+    "/zach": {
+        "target": "http://localhost:4200",
+        "secure": false,
+        "pathRewrite": {
+            "^/zach": ""
+        }
     }
 }
